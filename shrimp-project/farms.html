@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30+ ฟาร์มพันธมิตร | SHRIMP TRUST 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e67e22;
+            --secondary: #2c3e50;
+            --line-green: #06C755;
+            --bg-light: #f4f7f6;
+            --accent-blue: #2980b9;
+        }
+
+        body {
+            font-family: 'Anuphan', sans-serif;
+            margin: 0;
+            background-color: var(--bg-light);
+            color: var(--secondary);
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            margin-left: 20px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 20px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header-section span {
+            color: var(--primary);
+        }
+
+        /* Grid Layout สำหรับ 35 ฟาร์ม */
+        .farm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .farm-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: 0.4s;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .farm-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ส่วนรูปภาพฟาร์ม */
+        .farm-visual {
+            position: relative;
+            height: 200px;
+            background: #ddd;
+        }
+
+        .farm-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .farm-logo-overlay {
+            position: absolute;
+            bottom: -15px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
+        }
+
+        .farm-info {
+            padding: 25px 20px 20px;
+            flex-grow: 1;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: var(--primary);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .online-status {
+            font-size: 0.75rem;
+            color: #27ae60;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #27ae60;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .location {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+
+        /* แถบค่าสถานะ IoT */
+        .water-status {
+            display: flex;
+            justify-content: space-between;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #edf2f7;
+        }
+
+        .status-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .status-item label {
+            display: block;
+            font-size: 0.65rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .status-item span {
+            font-weight: 700;
+            color: var(--accent-blue);
+            font-size: 0.9rem;
+        }
+
+        .btn-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--line-green);
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 15px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-line:hover {
+            background-color: #05b34c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">🦐 SHRIMP TRUST</a>
+        <div class="nav-links">
+            <a href="index.html">หน้าหลัก</a>
+            <a href="farms.html" style="font-weight: 700; color: var(--primary);">สินค้าฟาร์ม</a>
+            <a href="tracking.html">เช็คพัสดุ</a>
+            <a href="about.html">ติดต่อเรา</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>🚜 ฟาร์ม <span>พันธมิตร</span> ทั้งหมด</h1>
+            <p>ตรวจสอบสถานะบ่อเลี้ยงแบบ Real-time และสั่งซื้อตรงจากเกษตรกร</p>
+        </div>
+
+        <div class="farm-grid" id="farm-display">
+        </div>
+    </div>
+
+    <script>
+        // ข้อมูลจำลองสำหรับสร้างความหลากหลาย
+        const provinces = ["นครปฐม", "ฉะเชิงเทรา", "สมุทรสาคร", "ระยอง", "สระบุรี", "ราชบุรี", "สงขลา", "สุราษฎร์ฯ", "พังงา", "จันทบุรี"];
+        const farmNames = ["สมชายฟาร์ม", "กุ้งทองการเกษตร", "ทรัพย์ทวีฟาร์ม", "รุ่งเรืองพานิช", "ฟาร์มสุขใจ", "สยามอควา", "เพชรชริมป์"];
+        const icons = ["🦐", "🚜", "🌊", "🏠", "💎", "🌟"];
+
+        // รายการรูปฟาร์มกุ้งจริง (สลับกันใช้)
+        const farmImages = [
+            "https://www.frozenfocusthailand.com/wp-content/uploads/2021/04/shrimp-farm-thailand.jpg",
+            "https://www.technologychaoban.com/wp-content/uploads/2019/07/01-38.jpg",
+            "https://www.smeleader.com/wp-content/uploads/2018/10/เลี้ยงกุ้งก้ามกราม.jpg",
+            "https://ทํานายฝัน.com/wp-content/uploads/2023/11/shrimp-farm-1.jpg",
+            "https://กองสวัสดิการสังคม.com/wp-content/uploads/2023/05/shrimp-pond.jpg"
+        ];
+
+        const display = document.getElementById('farm-display');
+
+        // วนลูปสร้าง 35 ฟาร์ม
+        for (let i = 1; i <= 35; i++) {
+            const name = farmNames[Math.floor(Math.random() * farmNames.length)];
+            const prov = provinces[Math.floor(Math.random() * provinces.length)];
+            const icon = icons[Math.floor(Math.random() * icons.length)];
+            const price = Math.floor(Math.random() * (550 - 280)) + 280;
+            const img = farmImages[i % farmImages.length];
+
+            // สุ่มค่า IoT ให้ดูสมจริง
+            const temp = (Math.random() * (30 - 27) + 27).toFixed(1);
+            const ph = (Math.random() * (8.2 - 7.5) + 7.5).toFixed(1);
+            const ox = (Math.random() * (6 - 4) + 4).toFixed(1);
+
+            const cardHtml = `
+                <div class="farm-card">
+                    <div class="farm-visual">
+                        <img src="${img}" class="farm-img" alt="บ่อกุ้ง">
+                        <div class="farm-logo-overlay">${icon}</div>
+                    </div>
+                    <div class="farm-info">
+                        <div class="price-row">
+                            <div class="price">${price}.- <small style="font-size: 0.7rem; color: #888;">/ กก.</small></div>
+                            <div class="online-status"><div class="dot"></div> IoT Live</div>
+                        </div>
+                        <h3 style="margin: 0 0 5px 0; font-size: 1.1rem;">${name} #${i}</h3>
+                        <p class="location">📍 จังหวัด${prov}</p>
+
+                        <div class="water-status">
+                            <div class="status-item">
+                                <label>Temp</label>
+                                <span>${temp}°C</span>
+                            </div>
+                            <div class="status-item">
+                                <label>pH</label>
+                                <span>${ph}</span>
+                            </div>
+                            <div class="status-item">
+                                <label>Oxygen</label>
+                                <span>${ox}</span>
+                            </div>
+                        </div>
+
+                        <a href="https://line.me/ti/p/~ID_LINE" target="_blank" class="btn-line">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" width="18"> 
+                            สั่งซื้อผ่าน LINE
+                        </a>
+                    </div>
+                </div>
+            `;
+            display.innerHTML += cardHtml;
+        }
+    </script>
+
+</body>
+
+</html>
