@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ติดตามสถานะพัสดุ - Shrimp Trust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #e67e22;
+            /* สีส้มหลักของ Shrimp Trust */
+        }
+
+        body {
+            font-family: 'Kanit', sans-serif;
+            text-align: center;
+            padding: 40px 20px;
+            background: #f4f7f6;
+            margin: 0;
+        }
+
+        .track-box {
+            background: white;
+            padding: 50px 30px;
+            border-radius: 35px;
+            max-width: 650px;
+            margin: auto;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            /* แบ่ง 2 คอลัมน์ */
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .track-link {
+            padding: 18px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* กำหนดสีแยกตามแบรนด์ขนส่ง */
+        .kex {
+            background: #ff6b00 !important;
+        }
+
+        /* สีส้ม Kex */
+        .thpost {
+            background: #ed1c24 !important;
+        }
+
+        /* สีแดง ไปรษณีย์ไทย */
+        .flash {
+            background: #f7e314 !important;
+            color: #000 !important;
+        }
+
+        /* สีเหลือง Flash */
+        .jt {
+            background: #ff0000 !important;
+        }
+
+        /* สีแดง J&T */
+
+        .track-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            filter: brightness(1.1);
+        }
+
+        .footer-note {
+            font-size: 0.85rem;
+            color: #95a5a6;
+            margin-top: 30px;
+            font-weight: 300;
+        }
+
+        /* ปุ่มย้อนกลับหน้าหลัก */
+        .back-btn {
+            display: inline-block;
+            margin-top: 40px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* ปรับแต่งสำหรับมือถือ */
+        @media (max-width: 480px) {
+            .btn-group {
+                grid-template-columns: 1fr;
+                /* มือถือโชว์แถวละ 1 ปุ่ม */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="track-box">
+        <div style="font-size: 60px; margin-bottom: 10px;">📦</div>
+        <h2>ติดตามสถานะพัสดุ</h2>
+        <p class="subtitle">เลือกผู้ให้บริการขนส่งเพื่อตรวจสอบตำแหน่งกุ้งของคุณ</p>
+
+        <div class="btn-group">
+            <a href="https://th.kex-express.com/th/track/" target="_blank" class="track-link kex">Kex Express</a>
+            <a href="https://track.thailandpost.co.th/" target="_blank" class="track-link thpost">ไปรษณีย์ไทย</a>
+            <a href="https://www.flashexpress.co.th/tracking/" target="_blank" class="track-link flash">Flash
+                Express</a>
+            <a href="https://www.jtexpress.co.th/index/query/gzquery.html" target="_blank" class="track-link jt">J&T
+                Express</a>
+        </div>
+
+        <p class="footer-note">
+            *ระบุเลขพัสดุที่ได้รับจากเจ้าของฟาร์มในหน้าเว็บของผู้ให้บริการ
+        </p>
+    </div>
+
+    <a href="index.html" class="back-btn">← กลับสู่หน้าหลัก Shrimp Trust</a>
+
+</body>
+
+</html>
