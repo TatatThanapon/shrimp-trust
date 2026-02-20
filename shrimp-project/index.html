@@ -221,9 +221,62 @@
 </head>
 
 <body>
+    <div id="welcome-popup"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; z-index: 9999; font-family: 'Kanit', sans-serif;">
+        <div
+            style="background: white; padding: 45px; border-radius: 35px; text-align: center; max-width: 550px; width: 90%; box-shadow: 0 25px 70px rgba(0,0,0,0.6); animation: popupFade 0.5s ease;">
+
+            <div style="margin-bottom: 25px;">
+                <img src="images/555.jpg" alt="Logo"
+                    style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 6px solid #e67e22; box-shadow: 0 10px 20px rgba(0,0,0,0.15);">
+            </div>
+
+            <h2
+                style="font-family: 'Kanit', sans-serif; color: #e67e22; margin-bottom: 15px; font-size: 2.2rem; font-weight: 600; letter-spacing: 0.5px;">
+                ยินดีต้อนรับสู่ SHRIMP TRUST
+            </h2>
+
+            <p
+                style="font-family: 'Kanit', sans-serif; color: #444; line-height: 1.8; margin-bottom: 35px; font-size: 1.2rem; font-weight: 300;">
+                เราคือเว็ปไซต์การันตีความสด สะอาดจากพันธมิตรฟาร์ม <br>
+                ที่ใช้เทคโนโลยี Blockchain และ IoT ในการติดตามคุณภาพกุ้งสดส่งตรงจากฟาร์มถึงมือคุณ
+            </p>
+
+            <button onclick="closePopup()"
+                style="font-family: 'Kanit', sans-serif; background: #e67e22; color: white; border: none; padding: 15px 60px; border-radius: 50px; font-size: 1.3rem; cursor: pointer; font-weight: 500; transition: 0.4s; box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);">
+                ตกลง เข้าสู่เว็บไซต์
+            </button>
+        </div>
+    </div>
+
+    <style>
+        /* นำเข้าฟอนต์ Kanit จาก Google Fonts (กันเหนียวถ้าใน CSS หลักไม่มี) */
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;600&display=swap');
+
+        @keyframes popupFade {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        #welcome-popup button:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: #d35400;
+            box-shadow: 0 8px 25px rgba(211, 84, 0, 0.5);
+        }
+    </style>
 
     <nav>
-        <a href="index.html" class="logo">🦐 SHRIMP TRUST 2026</a>
+        <a href="index.html" class="logo">
+            <img src="images/555.jpg" alt="Logo" class="nav-logo-img" style="height: 60px; width: auto;">
+            SHRIMP TRUST 2026
+        </a>
         <div class="nav-links">
             <a href="farms.html">สินค้าฟาร์ม</a>
             <a href="tracking.html">เช็คพัสดุ</a>
@@ -245,17 +298,23 @@
     <div class="container">
         <div class="card-grid">
             <a href="product-detail.html" class="card">
-                <div class="card-icon">🔍</div>
+                <div class="card-icon">
+                    <img src="images/222.jpg" alt="Farm Products" style="width: 150px; height: 150px;">
+                </div>
                 <h3>ตรวจสอบความสด</h3>
                 <p>สแกน QR Code เพื่อดูข้อมูลกุ้งในจานของคุณ</p>
             </a>
             <a href="farms.html" class="card">
-                <div class="card-icon">🦐</div>
+                <div class="card-icon">
+                    <img src="images/111.jpg" alt="Farm Products" style="width: 150px; height: 150px;">
+                </div>
                 <h3>สินค้าฟาร์ม</h3>
                 <p>เลือกสินค้าได้มากมายจากเจ้าของฟาร์ม</p>
             </a>
             <a href="tracking.html" class="card">
-                <div class="card-icon">🚚</div>
+                <div class="card-icon">
+                    <img src="images/333.jpg" alt="Farm Products" style="width: 150px; height: 150px;">
+                </div>
                 <h3>ติดตามพัสดุ</h3>
                 <p>เช็คตำแหน่งรถขนส่งห้องเย็นแบบ Real-time</p>
             </a>
@@ -269,8 +328,7 @@
 
             <div class="pond-display">
                 <div class="pond-card">
-                    <img src="https://www.frozenfocusthailand.com/wp-content/uploads/2021/04/shrimp-farm-thailand.jpg"
-                        class="pond-img" alt="Farm">
+                    <img src="images/1-1.jpg" class="pond-img" alt="Farm">
                     <div class="pond-info">
                         <strong>บ่อที่ 01 (ฟาร์มลุงสมชาย)</strong>
                         <div class="status-grid">
@@ -281,8 +339,7 @@
                 </div>
 
                 <div class="pond-card">
-                    <img src="https://static.bangkokpost.com/media/content/20210517/c1_2116819.jpg" class="pond-img"
-                        alt="Farm">
+                    <img src="images/1-2.jpg" class="pond-img" alt="Farm">
                     <div class="pond-info">
                         <strong>บ่อที่ 14 (กุ้งทองฟาร์ม)</strong>
                         <div class="status-grid">
@@ -305,13 +362,26 @@
     </footer>
 
     <script>
-        function updateClock() {
-            const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            document.getElementById('live-clock').innerText = "🕒 " + now.toLocaleDateString('th-TH', options);
+        // เช็คว่าเคยปิด Popup ไปหรือยังใน Session นี้
+        window.onload = function () {
+            if (sessionStorage.getItem('popupClosed') === 'true') {
+                document.getElementById('welcome-popup').style.display = 'none';
+            }
+        };
+
+        function closePopup() {
+            const popup = document.getElementById('welcome-popup');
+            popup.style.transition = '0.5s';
+            popup.style.opacity = '0';
+            popup.style.visibility = 'hidden';
+
+            // บันทึกไว้ว่าผู้ใช้กดปิดแล้ว (จะจำไว้จนกว่าจะปิด Tab หรือปิด Browser)
+            sessionStorage.setItem('popupClosed', 'true');
+
+            setTimeout(() => {
+                popup.remove();
+            }, 500);
         }
-        setInterval(updateClock, 1000);
-        updateClock();
     </script>
 </body>
 
