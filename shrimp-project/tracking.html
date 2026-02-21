@@ -5,29 +5,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ติดตามสถานะพัสดุ - Shrimp Trust</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Anuphan:wght@300;500;700&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
             --primary: #e67e22;
-            /* สีส้มหลักของ Shrimp Trust */
+            --secondary: #2c3e50;
+            --white: #ffffff;
         }
 
         body {
-            font-family: 'Kanit', sans-serif;
-            text-align: center;
-            padding: 40px 20px;
-            background: #f4f7f6;
+            font-family: 'Anuphan', 'Kanit', sans-serif;
             margin: 0;
+            background: #f4f7f6;
+            color: var(--secondary);
         }
 
+        /* --- Navigation Bar --- */
+        nav {
+            background: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            text-align: left;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-area img {
+            height: 50px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            margin-left: 20px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .lang-select-nav {
+            margin-left: 15px;
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-family: 'Anuphan';
+            cursor: pointer;
+            background: white;
+        }
+
+        /* --- Tracking Box Content --- */
         .track-box {
             background: white;
             padding: 50px 30px;
             border-radius: 35px;
             max-width: 650px;
-            margin: auto;
+            margin: 60px auto 20px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            text-align: center;
         }
 
         h2 {
@@ -45,7 +109,6 @@
         .btn-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            /* แบ่ง 2 คอลัมน์ */
             gap: 15px;
             margin-top: 20px;
         }
@@ -64,28 +127,22 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* กำหนดสีแยกตามแบรนด์ขนส่ง */
         .kex {
             background: #ff6b00 !important;
         }
 
-        /* สีส้ม Kex */
         .thpost {
             background: #ed1c24 !important;
         }
 
-        /* สีแดง ไปรษณีย์ไทย */
         .flash {
             background: #f7e314 !important;
             color: #000 !important;
         }
 
-        /* สีเหลือง Flash */
         .jt {
-            background: #ff0000 !important;
+            background: #2300c0 !important;
         }
-
-        /* สีแดง J&T */
 
         .track-link:hover {
             transform: translateY(-5px);
@@ -100,25 +157,28 @@
             font-weight: 300;
         }
 
-        /* ปุ่มย้อนกลับหน้าหลัก */
         .back-btn {
             display: inline-block;
-            margin-top: 40px;
+            margin-top: 20px;
             text-decoration: none;
             color: var(--primary);
             font-weight: 500;
             transition: 0.3s;
+            text-align: center;
+            width: 100%;
         }
 
         .back-btn:hover {
             text-decoration: underline;
         }
 
-        /* ปรับแต่งสำหรับมือถือ */
-        @media (max-width: 480px) {
+        @media (max-width: 600px) {
+            .nav-links a:not(#lang-select) {
+                display: none;
+            }
+
             .btn-group {
                 grid-template-columns: 1fr;
-                /* มือถือโชว์แถวละ 1 ปุ่ม */
             }
         }
     </style>
@@ -126,27 +186,107 @@
 
 <body>
 
+    <nav>
+        <a href="index.html" class="logo-area">
+            <img src="images/555.jpg" alt="Logo">
+            <span class="logo-text">SHRIMP TRUST 2026</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" data-key="nav-home">หน้าหลัก</a>
+            <a href="farms.html" data-key="nav-farms">สินค้าฟาร์ม</a>
+            <a href="tracking.html" style="font-weight: 700; color: var(--primary);"
+                data-key="nav-tracking">เช็คพัสดุ</a>
+            <a href="about.html" data-key="nav-contact">ติดต่อเรา</a>
+
+            <select class="lang-select-nav" id="lang-select" onchange="changeLanguage(this.value)">
+                <option value="th">🇹🇭 TH</option>
+                <option value="en">🇺🇸 EN</option>
+                <option value="cn">🇨🇳 CN</option>
+                <option value="jp">🇯🇵 JP</option>
+                <option value="kr">🇰🇷 KR</option>
+            </select>
+        </div>
+    </nav>
+
     <div class="track-box">
         <div style="font-size: 60px; margin-bottom: 10px;">📦</div>
-        <h2>ติดตามสถานะพัสดุ</h2>
-        <p class="subtitle">เลือกผู้ให้บริการขนส่งเพื่อตรวจสอบตำแหน่งกุ้งของคุณ</p>
+        <h2 data-key="track-h2">ติดตามสถานะพัสดุ</h2>
+        <p class="subtitle" data-key="track-subtitle">เลือกผู้ให้บริการขนส่งเพื่อตรวจสอบตำแหน่งกุ้งของคุณ</p>
 
         <div class="btn-group">
             <a href="https://th.kex-express.com/th/track/" target="_blank" class="track-link kex">Kex Express</a>
-            <a href="https://track.thailandpost.co.th/" target="_blank" class="track-link thpost">ไปรษณีย์ไทย</a>
+            <a href="https://www.scgexpress.co.th/tracking/" target="_blank" class="track-link thpost">SCG Express</a>
             <a href="https://www.flashexpress.co.th/tracking/" target="_blank" class="track-link flash">Flash
                 Express</a>
-            <a href="https://www.jtexpress.co.th/index/query/gzquery.html" target="_blank" class="track-link jt">J&T
-                Express</a>
+            <a href="https://iel.co.th/tracking/" target="_blank" class="track-link jt">Inter Express</a>
         </div>
 
-        <p class="footer-note">
+        <p class="footer-note" data-key="track-note">
             *ระบุเลขพัสดุที่ได้รับจากเจ้าของฟาร์มในหน้าเว็บของผู้ให้บริการ
         </p>
     </div>
 
-    <a href="index.html" class="back-btn">← กลับสู่หน้าหลัก Shrimp Trust</a>
+    <a href="index.html" class="back-btn" data-key="back-home">← กลับสู่หน้าหลัก Shrimp Trust</a>
 
+    <script>
+        const translations = {
+            th: {
+                "nav-home": "หน้าหลัก", "nav-farms": "สินค้าฟาร์ม", "nav-tracking": "เช็คพัสดุ", "nav-contact": "ติดต่อเรา",
+                "track-h2": "ติดตามสถานะพัสดุ",
+                "track-subtitle": "เลือกผู้ให้บริการขนส่งเพื่อตรวจสอบตำแหน่งกุ้งของคุณ",
+                "track-note": "*ระบุเลขพัสดุที่ได้รับจากเจ้าของฟาร์มในหน้าเว็บของผู้ให้บริการ",
+                "back-home": "← กลับสู่หน้าหลัก Shrimp Trust"
+            },
+            en: {
+                "nav-home": "Home", "nav-farms": "Farms", "nav-tracking": "Tracking", "nav-contact": "Contact",
+                "track-h2": "Track Your Shipment",
+                "track-subtitle": "Select a courier service to check your shrimp's location",
+                "track-note": "*Enter the tracking number provided by the farm on the courier's website",
+                "back-home": "← Back to Shrimp Trust Home"
+            },
+            cn: {
+                "nav-home": "首页", "nav-farms": "农场产品", "nav-tracking": "包裹查询", "nav-contact": "联系我们",
+                "track-h2": "包裹查询",
+                "track-subtitle": "选择物流服务商以查询您的虾只位置",
+                "track-note": "*在物流商网站上输入农场提供的运单号",
+                "back-home": "← 返回 Shrimp Trust 首页"
+            },
+            jp: {
+                "nav-home": "ホーム", "nav-farms": "ファーム", "nav-tracking": "配送確認", "nav-contact": "お問い合わせ",
+                "track-h2": "配送状況の確認",
+                "track-subtitle": "配送業者を選択して、海老の現在地を確認してください",
+                "track-note": "*農場から受け取った追跡番号を業者のサイトで入力してください",
+                "back-home": "← Shrimp Trust ホームに戻る"
+            },
+            kr: {
+                "nav-home": "홈", "nav-farms": "농장 상품", "nav-tracking": "배송 조회", "nav-contact": "문의하기",
+                "track-h2": "배송 상태 조회",
+                "track-subtitle": "배송업체를 선택하여 새우의 위치를 확인하세요",
+                "track-note": "*농장에서 받은 운송장 번호를 해당 업체 사이트에 입력하세요",
+                "back-home": "← Shrimp Trust 홈으로 돌아가기"
+            }
+        };
+
+        function changeLanguage(lang) {
+            localStorage.setItem('selectedLang', lang);
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const lang = localStorage.getItem('selectedLang') || 'th';
+            const selectEl = document.getElementById('lang-select');
+            if (selectEl) selectEl.value = lang;
+
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', applyLanguage);
+    </script>
 </body>
 
 </html>

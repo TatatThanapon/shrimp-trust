@@ -44,6 +44,11 @@
             gap: 8px;
         }
 
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
         .nav-links a {
             text-decoration: none;
             color: var(--secondary);
@@ -56,11 +61,20 @@
             color: var(--primary);
         }
 
+        .lang-select {
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 1px solid var(--primary);
+            font-family: 'Anuphan';
+            cursor: pointer;
+            margin-left: 20px;
+            background: white;
+        }
+
         /* Hero Banner */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
                 url('images/1.jpg');
-            /* เติม images/ ไว้ข้างหน้าชื่อไฟล์ */
             background-size: cover;
             background-position: center;
             height: 450px;
@@ -217,60 +231,80 @@
             color: white;
             margin-top: 80px;
         }
+
+        .live-dashboard {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px auto;
+            max-width: 1000px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .time-box {
+            text-align: center;
+            border-right: 2px solid #eee;
+            padding-right: 30px;
+        }
+
+        #current-time {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .temp-grid {
+            display: flex;
+            gap: 15px;
+        }
+
+        .temp-item {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 12px;
+        }
+
+        .temp-item label {
+            display: block;
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .temp-item span {
+            font-weight: 700;
+            color: #2980b9;
+        }
     </style>
 </head>
 
 <body>
     <div id="welcome-popup"
-        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; z-index: 9999; font-family: 'Kanit', sans-serif;">
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; z-index: 9999; font-family: 'Anuphan', sans-serif;">
         <div
             style="background: white; padding: 45px; border-radius: 35px; text-align: center; max-width: 550px; width: 90%; box-shadow: 0 25px 70px rgba(0,0,0,0.6); animation: popupFade 0.5s ease;">
-
             <div style="margin-bottom: 25px;">
                 <img src="images/555.jpg" alt="Logo"
                     style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 6px solid #e67e22; box-shadow: 0 10px 20px rgba(0,0,0,0.15);">
             </div>
-
-            <h2
-                style="font-family: 'Kanit', sans-serif; color: #e67e22; margin-bottom: 15px; font-size: 2.2rem; font-weight: 600; letter-spacing: 0.5px;">
-                ยินดีต้อนรับสู่ SHRIMP TRUST
-            </h2>
-
-            <p
-                style="font-family: 'Kanit', sans-serif; color: #444; line-height: 1.8; margin-bottom: 35px; font-size: 1.2rem; font-weight: 300;">
-                เราคือเว็ปไซต์การันตีความสด สะอาดจากพันธมิตรฟาร์ม <br>
+            <h2 data-key="popup-title"
+                style="color: #e67e22; margin-bottom: 15px; font-size: 2.2rem; font-weight: 600;">ยินดีต้อนรับสู่ SHRIMP
+                TRUST</h2>
+            <p data-key="popup-desc"
+                style="color: #444; line-height: 1.8; margin-bottom: 35px; font-size: 1.2rem; font-weight: 300;">
+                เราคือเว็บไซต์การันตีความสด สะอาดจากพันธมิตรฟาร์ม <br>
                 ที่ใช้เทคโนโลยี Blockchain และ IoT ในการติดตามคุณภาพกุ้งสดส่งตรงจากฟาร์มถึงมือคุณ
             </p>
-
-            <button onclick="closePopup()"
-                style="font-family: 'Kanit', sans-serif; background: #e67e22; color: white; border: none; padding: 15px 60px; border-radius: 50px; font-size: 1.3rem; cursor: pointer; font-weight: 500; transition: 0.4s; box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);">
+            <button onclick="closePopup()" data-key="popup-btn"
+                style="background: #e67e22; color: white; border: none; padding: 15px 60px; border-radius: 50px; font-size: 1.3rem; cursor: pointer; font-weight: 500; transition: 0.4s;">
                 ตกลง เข้าสู่เว็บไซต์
             </button>
         </div>
     </div>
-
-    <style>
-        /* นำเข้าฟอนต์ Kanit จาก Google Fonts (กันเหนียวถ้าใน CSS หลักไม่มี) */
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;600&display=swap');
-
-        @keyframes popupFade {
-            from {
-                transform: scale(0.7);
-                opacity: 0;
-            }
-
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        #welcome-popup button:hover {
-            transform: translateY(-3px) scale(1.05);
-            background: #d35400;
-            box-shadow: 0 8px 25px rgba(211, 84, 0, 0.5);
-        }
-    </style>
 
     <nav>
         <a href="index.html" class="logo">
@@ -278,110 +312,221 @@
             SHRIMP TRUST 2026
         </a>
         <div class="nav-links">
-            <a href="farms.html">สินค้าฟาร์ม</a>
-            <a href="tracking.html">เช็คพัสดุ</a>
-            <a href="product-detail.html"><strong>สแกนกุ้ง (Demo)</strong></a> <a href="about.html">ติดต่อเรา</a>
+            <a href="farms.html" data-key="nav-farms">สินค้าฟาร์ม</a>
+            <a href="my-orders.html" data-key="nav-orders">คำสั่งซื้อ</a>
+            <a href="tracking.html" data-key="nav-tracking">เช็คพัสดุ</a>
+            <a href="reviews.html" data-key="nav-reviews">รีวิว</a> <a href="about.html"
+                data-key="nav-contact">ติดต่อเรา</a>
+            <a href="login.html" data-key="nav-login">เข้าสู่ระบบ</a> <select class="lang-select" id="lang-select"
+                onchange="changeLanguage(this.value)">
+                <option value="th">🇹🇭 TH</option>
+                <option value="en">🇺🇸 EN</option>
+                <option value="cn">🇨🇳 CN</option>
+                <option value="jp">🇯🇵 JP</option>
+                <option value="kr">🇰🇷 KR</option>
+            </select>
         </div>
     </nav>
 
     <div class="hero">
-        <div
+        <div data-key="hero-badge"
             style="background: var(--primary); color: white; padding: 6px 18px; border-radius: 50px; font-size: 1.2rem; margin-bottom: 15px;">
-            การันตีคุณภาพจากฟาร์มถึงบ้านคุณ เว็ปไซต์ต้นแบบสำหรับรายวิชา401-2568</div>
-        <h1>คุณภาพที่มองเห็นได้... จากบ่อสู่โต๊ะ</h1>
-        <p>ตรวจสอบสถานะ IoT Real-time และความสดของกุ้งได้ทุกวินาที</p>
-        <div id="live-clock"
-            style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 10px 25px; border-radius: 15px; font-weight: 500;">
+            การันตีคุณภาพจากฟาร์มถึงบ้านคุณ เว็บไซต์ต้นแบบสำหรับรายวิชา 401-2568</div>
+        <h1 data-key="hero-title">คุณภาพที่มองเห็นได้... จากบ่อสู่โต๊ะ</h1>
+        <p data-key="hero-subtitle">ตรวจสอบสถานะ IoT Real-time และความสดของกุ้งได้ทุกวินาที</p>
+        <div class="live-dashboard">
+            <div class="time-box">
+                <div id="current-date" style="font-size: 0.9rem; color: #666;"></div>
+                <div id="current-time">00:00:00</div>
+                <div data-key="live-sync" style="font-size: 0.7rem; color: #27ae60;">● LIVE THAILAND (DATA SYNC)</div>
+            </div>
+            <div class="temp-grid">
+                <div class="temp-item"><label data-key="reg-c">กลาง</label><span id="temp-central">--</span>°C</div>
+                <div class="temp-item"><label data-key="reg-n">เหนือ</label><span id="temp-north">--</span>°C</div>
+                <div class="temp-item"><label data-key="reg-s">ใต้</label><span id="temp-south">--</span>°C</div>
+                <div class="temp-item"><label data-key="reg-e">อีสาน</label><span id="temp-east">--</span>°C</div>
+                <div class="temp-item"><label data-key="reg-w">ตะวันออก</label><span id="temp-coastal">--</span>°C</div>
+            </div>
         </div>
     </div>
 
     <div class="container">
         <div class="card-grid">
             <a href="product-detail.html" class="card">
-                <div class="card-icon">
-                    <img src="images/222.jpg" alt="Farm Products" style="width: 150px; height: 150px;">
-                </div>
-                <h3>ตรวจสอบความสด</h3>
-                <p>สแกน QR Code เพื่อดูข้อมูลกุ้งในจานของคุณ</p>
+                <div class="card-icon"><img src="images/222.jpg" alt="Scan" style="width: 150px; height: 150px;"></div>
+                <h3 data-key="card1-h">ตรวจสอบความสด</h3>
+                <p data-key="card1-p">สแกน QR Code เพื่อดูข้อมูลกุ้งในจานของคุณ</p>
             </a>
             <a href="farms.html" class="card">
-                <div class="card-icon">
-                    <img src="images/111.jpg" alt="Farm Products" style="width: 150px; height: 150px;">
+                <div class="card-icon"><img src="images/111.jpg" alt="Products" style="width: 150px; height: 150px;">
                 </div>
-                <h3>สินค้าฟาร์ม</h3>
-                <p>เลือกสินค้าได้มากมายจากเจ้าของฟาร์ม</p>
+                <h3 data-key="card2-h">สินค้าฟาร์ม</h3>
+                <p data-key="card2-p">เลือกสินค้าได้มากมายจากเจ้าของฟาร์ม</p>
             </a>
             <a href="tracking.html" class="card">
-                <div class="card-icon">
-                    <img src="images/333.jpg" alt="Farm Products" style="width: 150px; height: 150px;">
+                <div class="card-icon"><img src="images/333.jpg" alt="Tracking" style="width: 150px; height: 150px;">
                 </div>
-                <h3>ติดตามพัสดุ</h3>
-                <p>เช็คตำแหน่งรถขนส่งห้องเย็นแบบ Real-time</p>
+                <h3 data-key="card3-h">ติดตามพัสดุ</h3>
+                <p data-key="card3-p">เช็คตำแหน่งรถขนส่งห้องเย็นแบบ Real-time</p>
             </a>
         </div>
 
         <div class="iot-panel">
             <div class="panel-header">
-                <h2 style="margin:0">📍 สถานะบ่อกุ้งล่าสุด (35 ฟาร์มพันธมิตร)</h2>
+                <h2 style="margin:0" data-key="iot-title">📍 สถานะบ่อกุ้งล่าสุด (35 ฟาร์มพันธมิตร)</h2>
                 <div class="live-tag">● LIVE STREAMING</div>
             </div>
-
             <div class="pond-display">
                 <div class="pond-card">
                     <img src="images/1-1.jpg" class="pond-img" alt="Farm">
                     <div class="pond-info">
-                        <strong>บ่อที่ 01 (ฟาร์มลุงสมชาย)</strong>
+                        <strong data-key="pond1-name">บ่อที่ 01 (ฟาร์มลุงสมชาย)</strong>
                         <div class="status-grid">
-                            <div class="status-item"><span class="status-label">อุณหภูมิ</span> 28.5°C</div>
-                            <div class="status-item"><span class="status-label">ค่า pH</span> 7.9</div>
+                            <div class="status-item"><span class="status-label" data-key="stat-temp">อุณหภูมิ</span>
+                                28.5°C</div>
+                            <div class="status-item"><span class="status-label" data-key="stat-ph">ค่า pH</span> 7.9
+                            </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="pond-card">
                     <img src="images/1-2.jpg" class="pond-img" alt="Farm">
                     <div class="pond-info">
-                        <strong>บ่อที่ 14 (กุ้งทองฟาร์ม)</strong>
+                        <strong data-key="pond2-name">บ่อที่ 14 (กุ้งทองฟาร์ม)</strong>
                         <div class="status-grid">
-                            <div class="status-item"><span class="status-label">อุณหภูมิ</span> 27.2°C</div>
-                            <div class="status-item"><span class="status-label">ค่า pH</span> 8.1</div>
+                            <div class="status-item"><span class="status-label" data-key="stat-temp">อุณหภูมิ</span>
+                                27.2°C</div>
+                            <div class="status-item"><span class="status-label" data-key="stat-ph">ค่า pH</span> 8.1
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div style="text-align: center; margin-top: 30px;">
-                <a href="farms.html"
+                <a href="farms.html" data-key="btn-all-farms"
                     style="background: var(--secondary); color: white; padding: 12px 25px; border-radius: 12px; text-decoration: none; font-weight: 600;">ดูข้อมูลครบทุกฟาร์ม</a>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 SHRIMP TRUST Project | มหาวิทยาลัยศิลปากร</p>
+        <p data-key="footer-text">&copy; 2026 SHRIMP TRUST Project | มหาวิทยาลัยศิลปากร</p>
     </footer>
 
     <script>
-        // เช็คว่าเคยปิด Popup ไปหรือยังใน Session นี้
+        const translations = {
+            th: {
+                "nav-farms": "สินค้าฟาร์ม", "nav-orders": "คำสั่งซื้อ", "nav-tracking": "เช็คพัสดุ", "nav-reviews": "รีวิว", "nav-contact": "ติดต่อเรา", "nav-login": "เข้าสู่ระบบ",
+                "popup-title": "ยินดีต้อนรับสู่ SHRIMP TRUST", "popup-btn": "ตกลง เข้าสู่เว็บไซต์", "popup-desc": "เราคือเว็บไซต์การันตีความสด สะอาดจากพันธมิตรฟาร์มที่ใช้เทคโนโลยี Blockchain และ IoT",
+                "hero-badge": "การันตีคุณภาพจากฟาร์มถึงบ้านคุณ เว็บไซต์ต้นแบบสำหรับรายวิชา 401-2568",
+                "hero-title": "คุณภาพที่มองเห็นได้... จากบ่อสู่โต๊ะ", "hero-subtitle": "ตรวจสอบสถานะ IoT Real-time และความสดของกุ้งได้ทุกวินาที",
+                "live-sync": "● LIVE THAILAND (DATA SYNC)", "reg-c": "กลาง", "reg-n": "เหนือ", "reg-s": "ใต้", "reg-e": "อีสาน", "reg-w": "ตะวันออก",
+                "card1-h": "ตรวจสอบความสด", "card1-p": "สแกน QR Code เพื่อดูข้อมูลกุ้งในจานของคุณ",
+                "card2-h": "สินค้าฟาร์ม", "card2-p": "เลือกสินค้าได้มากมายจากเจ้าของฟาร์ม",
+                "card3-h": "ติดตามพัสดุ", "card3-p": "เช็คตำแหน่งรถขนส่งห้องเย็นแบบ Real-time",
+                "iot-title": "📍 สถานะบ่อกุ้งล่าสุด (35 ฟาร์มพันธมิตร)", "pond1-name": "บ่อที่ 01 (ฟาร์มลุงสมชาย)", "pond2-name": "บ่อที่ 14 (กุ้งทองฟาร์ม)",
+                "stat-temp": "อุณหภูมิ", "stat-ph": "ค่า pH", "btn-all-farms": "ดูข้อมูลครบทุกฟาร์ม", "footer-text": "© 2026 SHRIMP TRUST Project | มหาวิทยาลัยศิลปากร"
+            },
+            en: {
+                "nav-farms": "Products", "nav-orders": "My Orders", "nav-tracking": "Tracking", "nav-reviews": "Reviews", "nav-contact": "Contact", "nav-login": "Login",
+                "popup-title": "Welcome to SHRIMP TRUST", "popup-btn": "Enter Website", "popup-desc": "We are a website guaranteeing freshness using Blockchain and IoT technology.",
+                "hero-badge": "Guaranteed quality from farm to your home. Course Project 401-2568",
+                "hero-title": "Visible Quality... Pond to Table", "hero-subtitle": "Monitor IoT Real-time status and freshness every second",
+                "live-sync": "● LIVE THAILAND (DATA SYNC)", "reg-c": "Central", "reg-n": "North", "reg-s": "South", "reg-e": "East", "reg-w": "East",
+                "card1-h": "Freshness Check", "card1-p": "Scan QR Code to see info of the shrimp on your plate",
+                "card2-h": "Farm Products", "card2-p": "Wide range of products directly from farm owners",
+                "card3-h": "Package Tracking", "card3-p": "Real-time tracking for cold chain logistics",
+                "iot-title": "📍 Latest Pond Status (35 Partners)", "pond1-name": "Pond 01 (Somchai)", "pond2-name": "Pond 14 (Golden Shrimp)",
+                "stat-temp": "Temp", "stat-ph": "pH Value", "btn-all-farms": "View All Farms", "footer-text": "© 2026 SHRIMP TRUST Project | Silpakorn University"
+            },
+            cn: {
+                "nav-farms": "农产品", "nav-orders": "我的订单", "nav-tracking": "物流查询", "nav-reviews": "评论", "nav-contact": "联系我们", "nav-login": "登录",
+                "popup-title": "欢迎来到 SHRIMP TRUST", "popup-btn": "进入网站", "popup-desc": "我们是一家通过区块链和物联网技术保证农场新鲜度的网站。",
+                "hero-badge": "从农场到您家的质量保证。 401-2568 课程项目",
+                "hero-title": "看得见的品质... 从池塘到餐桌", "hero-subtitle": "实时监控物联网状态和虾的新鲜度",
+                "live-sync": "● 泰国实况数据同步", "reg-c": "中部", "reg-n": "北部", "reg-s": "南部", "reg-e": "东北", "reg-w": "东部",
+                "card1-h": "新鲜度检查", "card1-p": "扫描二维码查看您盘中虾的信息",
+                "card2-h": "农产品", "card2-p": "直接来自农场主的各种产品",
+                "card3-h": "包裹查询", "card3-p": "冷链物流实时位置查询",
+                "iot-title": "📍 最新池塘状态 (35 家合作伙伴)", "pond1-name": "01 号池 (颂猜农场)", "pond2-name": "14 号池 (金虾农场)",
+                "stat-temp": "温度", "stat-ph": "pH 值", "btn-all-farms": "查看所有农场", "footer-text": "© 2026 SHRIMP TRUST Project | 艺术大学 (Silpakorn)"
+            },
+            jp: {
+                "nav-farms": "農産物", "nav-orders": "注文履歴", "nav-tracking": "追跡", "nav-reviews": "レビュー", "nav-contact": "連絡先", "nav-login": "ログイン",
+                "popup-title": "SHRIMP TRUSTへようこそ", "popup-btn": "サイトに入る", "popup-desc": "ブロックチェーンとIoT技術を使用して鮮度を保証するサイトです。",
+                "hero-badge": "農場から自宅までの品質保証。401-2568 コースプロジェクト",
+                "hero-title": "目に見える品質... 池から食卓まで", "hero-subtitle": "IoTリアルタイム状態と鮮度を毎秒監視",
+                "live-sync": "● タイ ライブデータ同期", "reg-c": "中部", "reg-n": "北部", "reg-s": "南部", "reg-e": "北東", "reg-w": "東部",
+                "card1-h": "鮮度チェック", "card1-p": "QRコードをスキャンして、エビの情報を確認します",
+                "card2-h": "農産物", "card2-p": "農場主からの豊富なラインナップ",
+                "card3-h": "荷物追跡", "card3-p": "冷熱物流のリアルタイム追跡",
+                "iot-title": "📍 最新の池の状態 (35 提携先)", "pond1-name": "01号池 (ソムチャイ農場)", "pond2-name": "14号池 (ゴールデン農場)",
+                "stat-temp": "温度", "stat-ph": "pH値", "btn-all-farms": "全農場を見る", "footer-text": "© 2026 SHRIMP TRUST Project | シラパコーン大学"
+            },
+            kr: {
+                "nav-farms": "농산물", "nav-orders": "주문내역", "nav-tracking": "배송조회", "nav-reviews": "리뷰", "nav-contact": "문의하기", "nav-login": "로그인",
+                "popup-title": "SHRIMP TRUST에 오신 것을 환영합니다", "popup-btn": "사이트 접속", "popup-desc": "블록체인 및 IoT 기술로 신선도를 보장하는 플랫폼입니다.",
+                "hero-badge": "농장에서 식탁까지 품질 보장. 401-2568 과제 프로젝트",
+                "hero-title": "보이는 품질... 양식장에서 식탁까지", "hero-subtitle": "IoT 실시간 상태 및 신선도 모니터링",
+                "live-sync": "● 태국 라이브 데이터 동기화", "reg-c": "중부", "reg-n": "북부", "reg-s": "남부", "reg-e": "동북", "reg-w": "동부",
+                "card1-h": "신선도 확인", "card1-p": "QR 코드를 스캔하여 새우 정보를 확인하세요",
+                "card2-h": "농산물", "card2-p": "농장주가 직접 판매하는 다양한 상품",
+                "card3-h": "배송 추적", "card3-p": "콜드체인 물류 실시간 위치 확인",
+                "iot-title": "📍 최신 양식장 상태 (35개 파트너)", "pond1-name": "01번지 (솜차이 농장)", "pond2-name": "14번지 (황금 새우 농장)",
+                "stat-temp": "온도", "stat-ph": "pH 농도", "btn-all-farms": "모든 농장 보기", "footer-text": "© 2026 SHRIMP TRUST Project | 실라빠꼰 대학교"
+            }
+        };
+
+        function changeLanguage(lang) {
+            localStorage.setItem('selectedLang', lang);
+            const elements = document.querySelectorAll('[data-key]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+            updateClock();
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const savedLang = localStorage.getItem('selectedLang') || 'th';
+            const langMap = { th: 'th-TH', en: 'en-US', cn: 'zh-CN', jp: 'ja-JP', kr: 'ko-KR' };
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').innerText = now.toLocaleDateString(langMap[savedLang], options);
+            document.getElementById('current-time').innerText = now.toLocaleTimeString('th-TH');
+        }
+
+        function updateRandomTemps() {
+            const regionIds = ['central', 'north', 'south', 'east', 'coastal'];
+            regionIds.forEach(id => {
+                const randomTemp = (27.5 + Math.random() * 4).toFixed(1);
+                const element = document.getElementById(`temp-${id}`);
+                if (element) { element.innerText = randomTemp; }
+            });
+        }
+
         window.onload = function () {
             if (sessionStorage.getItem('popupClosed') === 'true') {
                 document.getElementById('welcome-popup').style.display = 'none';
             }
+            const savedLang = localStorage.getItem('selectedLang') || 'th';
+            document.getElementById('lang-select').value = savedLang;
+            changeLanguage(savedLang);
         };
 
         function closePopup() {
             const popup = document.getElementById('welcome-popup');
-            popup.style.transition = '0.5s';
             popup.style.opacity = '0';
-            popup.style.visibility = 'hidden';
-
-            // บันทึกไว้ว่าผู้ใช้กดปิดแล้ว (จะจำไว้จนกว่าจะปิด Tab หรือปิด Browser)
             sessionStorage.setItem('popupClosed', 'true');
-
-            setTimeout(() => {
-                popup.remove();
-            }, 500);
+            setTimeout(() => { popup.remove(); }, 500);
         }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+        updateRandomTemps();
+        setInterval(updateRandomTemps, 5000);
     </script>
 </body>
 

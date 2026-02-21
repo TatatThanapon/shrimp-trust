@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ | SHRIMP TRUST 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e67e22;
+            --secondary: #2c3e50;
+            --bg-light: #f0f2f5;
+        }
+
+        body {
+            font-family: 'Anuphan', sans-serif;
+            background-color: var(--bg-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .login-container p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-family: 'Anuphan';
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #d35400;
+        }
+
+        .social-login {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* ปุ่มเลือกภาษาในหน้า Login */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        #lang-select {
+            padding: 5px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-family: 'Anuphan';
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="lang-switch">
+        <select id="lang-select" onchange="changeLanguage(this.value)">
+            <option value="th">🇹🇭 TH</option>
+            <option value="en">🇺🇸 EN</option>
+            <option value="cn">🇨🇳 CN</option>
+            <option value="jp">🇯🇵 JP</option>
+            <option value="kr">🇰🇷 KR</option>
+        </select>
+    </div>
+
+    <div class="login-container">
+        <h2 data-key="login-title">ยินดีต้อนรับ</h2>
+        <p data-key="login-subtitle">เข้าสู่ระบบเพื่อสะสมคะแนน Shrimp Points</p>
+
+        <div class="input-group">
+            <input type="text" id="username" data-placeholder="ph-user" placeholder="ชื่อผู้ใช้งาน (ลองพิมพ์: user1)">
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" data-placeholder="ph-pass" placeholder="รหัสผ่าน">
+        </div>
+
+        <button class="btn-login" onclick="doLogin()" data-key="btn-login">เข้าสู่ระบบ</button>
+
+        <div class="social-login" data-key="social-text">
+            หรือเข้าสู่ระบบด้วย LINE / Facebook
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            th: {
+                "login-title": "ยินดีต้อนรับ",
+                "login-subtitle": "เข้าสู่ระบบเพื่อสะสมคะแนน Shrimp Points",
+                "btn-login": "เข้าสู่ระบบ",
+                "social-text": "หรือเข้าสู่ระบบด้วย LINE / Facebook",
+                "ph-user": "ชื่อผู้ใช้งาน (ลองพิมพ์: user1)",
+                "ph-pass": "รหัสผ่าน"
+            },
+            en: {
+                "login-title": "Welcome",
+                "login-subtitle": "Login to collect Shrimp Points",
+                "btn-login": "Login",
+                "social-text": "Or login with LINE / Facebook",
+                "ph-user": "Username (e.g., user1)",
+                "ph-pass": "Password"
+            },
+            cn: {
+                "login-title": "欢迎",
+                "login-subtitle": "登录以获取虾币积分",
+                "btn-login": "登录",
+                "social-text": "或使用 LINE / Facebook 登录",
+                "ph-user": "用户名 (例如: user1)",
+                "ph-pass": "密码"
+            },
+            jp: {
+                "login-title": "ようこそ",
+                "login-subtitle": "ログインしてシュリンプポイントを貯める",
+                "btn-login": "ログイン",
+                "social-text": "または LINE / Facebook でログイン",
+                "ph-user": "ユーザー名 (例: user1)",
+                "ph-pass": "パスワード"
+            },
+            kr: {
+                "login-title": "환영합니다",
+                "login-subtitle": "로그인하고 슈림프 포인트를 적립하세요",
+                "btn-login": "로그인",
+                "social-text": "또는 LINE / Facebook으로 로그인",
+                "ph-user": "사용자 이름 (예: user1)",
+                "ph-pass": "비밀번호"
+            }
+        };
+
+        function changeLanguage(lang) {
+            localStorage.setItem('selectedLang', lang);
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const lang = localStorage.getItem('selectedLang') || 'th';
+            document.getElementById('lang-select').value = lang;
+
+            // เปลี่ยนข้อความทั่วไป
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang][key]) el.innerText = translations[lang][key];
+            });
+
+            // เปลี่ยน Placeholder ของช่อง Input
+            document.querySelectorAll('[data-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-placeholder');
+                if (translations[lang][key]) el.placeholder = translations[lang][key];
+            });
+        }
+
+        function doLogin() {
+            const user = document.getElementById('username').value;
+            if (user) {
+                localStorage.setItem('shrimpUser', user);
+                alert('Login Success!');
+                window.location.href = 'farms.html'; // ล็อคอินเสร็จให้กลับไปหน้าฟาร์ม
+            } else {
+                alert('Please enter username');
+            }
+        }
+
+        // โหลดภาษาที่เลือกไว้ตอนเปิดหน้า
+        document.addEventListener('DOMContentLoaded', applyLanguage);
+    </script>
+</body>
+
+</html>

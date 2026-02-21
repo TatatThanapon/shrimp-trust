@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders | SHRIMP TRUST 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e67e22;
+            --secondary: #2c3e50;
+            --bg-light: #f4f7f6;
+            --white: #ffffff;
+            --gray: #95a5a6;
+            --gold: #f1c40f;
+        }
+
+        body {
+            font-family: 'Anuphan', sans-serif;
+            margin: 0;
+            background-color: var(--bg-light);
+            color: var(--secondary);
+            overflow-x: hidden;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            margin-left: 20px;
+            font-weight: 500;
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .lang-select {
+            margin-left: 20px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-family: 'Anuphan';
+            cursor: pointer;
+        }
+
+        /* --- Order Tabs --- */
+        .order-nav {
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tab-item {
+            cursor: pointer;
+            color: var(--gray);
+            font-weight: 500;
+            position: relative;
+            padding: 10px 5px;
+            font-size: 0.9rem;
+        }
+
+        .tab-item.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .badge {
+            background: #ff4757;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 4px;
+        }
+
+        /* --- Container & Cards --- */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .order-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #f8f8f8;
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+        }
+
+        .order-body {
+            display: flex;
+            gap: 20px;
+        }
+
+        .shrimp-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 22px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Anuphan';
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-pay {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-track {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-review {
+            background: white;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+        }
+
+        /* --- Luxury Modals --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            text-align: center;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        /* Payment UI */
+        .payment-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px;
+            border: 1.5px solid #f0f0f0;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary);
+            background: #fffaf5;
+        }
+
+        /* Map UI */
+        .map-box {
+            width: 100%;
+            height: 200px;
+            background: #2c3e50;
+            border-radius: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-direction: column;
+        }
+
+        /* Star Rating */
+        .star-rating {
+            font-size: 40px;
+            color: #ddd;
+            margin: 15px 0;
+        }
+
+        .star-rating span {
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .star-rating span.active {
+            color: var(--gold);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="images/555.jpg" alt="Logo" style="height: 45px; border-radius: 8px;">
+            <span style="color: #e67e22; font-weight: bold; font-size: 20px;">SHRIMP TRUST</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" data-key="m1">หน้าหลัก</a>
+            <a href="farms.html" data-key="m2">สินค้าฟาร์ม</a>
+            <a href="#" class="active" data-key="m3">คำสั่งซื้อ</a>
+            <a href="tracking.html" data-key="m4">เช็คพัสดุ</a>
+            <select class="lang-select" onchange="changeLang(this.value)">
+                <option value="th">🇹🇭 ไทย</option>
+                <option value="en">🇺🇸 English</option>
+                <option value="cn">🇨🇳 中文</option>
+                <option value="jp">🇯🇵 日本語</option>
+                <option value="kr">🇰🇷 한국어</option>
+            </select>
+        </div>
+    </nav>
+
+    <div class="order-nav">
+        <div class="tab-item active" onclick="filterOrder('all', event)" data-key="t1">ทั้งหมด</div>
+        <div class="tab-item" onclick="filterOrder('payment', event)" data-key="t2">ที่ต้องชำระ <span
+                class="badge">1</span></div>
+        <div class="tab-item" onclick="filterOrder('shipping', event)" data-key="t3">ที่ต้องจัดส่ง</div>
+        <div class="tab-item" onclick="filterOrder('transit', event)" data-key="t4">กำลังจัดส่ง</div>
+        <div class="tab-item" onclick="filterOrder('review', event)" data-key="t5">รอรีวิว <span class="badge">1</span>
+        </div>
+    </div>
+
+    <div class="container" id="order-list">
+        <div class="order-card" data-status="payment">
+            <div class="order-header">
+                <span class="farm-name">🚜 Somchai Farm #1</span>
+                <span class="order-status" data-key="s1">รอชำระเงิน</span>
+            </div>
+            <div class="order-body">
+                <img src="images/2-1.jpg" class="shrimp-img" onerror="this.src='https://via.placeholder.com/90'">
+                <div class="order-details">
+                    <h4 data-key="p1">กุ้งขาวแวนนาไม (ไซส์ใหญ่)</h4>
+                    <p><span data-key="qty">จำนวน</span>: 2 กก.</p>
+                    <p>Order ID: #ST2026001</p>
+                </div>
+            </div>
+            <div class="order-footer">
+                <button class="btn btn-pay" onclick="openModal('payModal')" data-key="b1">ชำระเงินตอนนี้</button>
+            </div>
+        </div>
+
+        <div class="order-card" data-status="review">
+            <div class="order-header">
+                <span class="farm-name">🚜 Shrimp Gold #5</span>
+                <span class="order-status" style="color:var(--gold)" data-key="s2">สำเร็จแล้ว</span>
+            </div>
+            <div class="order-body">
+                <img src="images/2-5.jpg" class="shrimp-img" onerror="this.src='https://via.placeholder.com/90'">
+                <div class="order-details">
+                    <h4 data-key="p2">กุ้งก้ามกรามสด</h4>
+                    <p><span data-key="qty">จำนวน</span>: 1 กก.</p>
+                    <p>Order ID: #ST2026005</p>
+                </div>
+            </div>
+            <div class="order-footer">
+                <button class="btn btn-review" onclick="openModal('revModal')" data-key="b3">ให้คะแนน</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="payModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('payModal')">&times;</span>
+            <h3 data-key="payT">ช่องทางชำระเงิน</h3>
+            <div class="payment-option">
+                <strong data-key="pTh">แอปธนาคารไทย</strong><span>›</span>
+            </div>
+            <div class="payment-option">
+                <strong>Credit / Debit Card</strong><span>›</span>
+            </div>
+            <div class="payment-option">
+                <strong data-key="pInt">International Bank</strong><span>›</span>
+            </div>
+            <button class="btn btn-pay" style="width:100%; margin-top:15px;" data-key="btnC">ยืนยัน</button>
+        </div>
+    </div>
+
+    <div id="revModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('revModal')">&times;</span>
+            <h3 data-key="revT">รีวิวสินค้า</h3>
+            <div class="star-rating" id="star-box">
+                <span onclick="setRate(1)">★</span><span onclick="setRate(2)">★</span><span
+                    onclick="setRate(3)">★</span><span onclick="setRate(4)">★</span><span onclick="setRate(5)">★</span>
+            </div>
+            <textarea id="rev-text"
+                style="width:100%; height:100px; padding:10px; border-radius:10px; border:1px solid #eee; font-family:'Anuphan'; box-sizing:border-box;"
+                placeholder="เขียนรีวิว..."></textarea>
+            <button class="btn btn-pay" style="width:100%; margin-top:15px;"
+                onclick="alert('Success!'); closeModal('revModal')" data-key="btnS">ส่งข้อมูล</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. ระบบแปลภาษา ---
+        const translations = {
+            th: { m1: "หน้าหลัก", m2: "สินค้าฟาร์ม", m3: "คำสั่งซื้อ", m4: "เช็คพัสดุ", t1: "ทั้งหมด", t2: "ที่ต้องชำระ", t3: "ที่ต้องจัดส่ง", t4: "กำลังจัดส่ง", t5: "รอรีวิว", s1: "รอชำระเงิน", s2: "สำเร็จแล้ว", p1: "กุ้งขาวแวนนาไม (ไซส์ใหญ่)", p2: "กุ้งก้ามกรามสด", qty: "จำนวน", b1: "ชำระเงินตอนนี้", b3: "ให้คะแนน", payT: "ช่องทางชำระเงิน", pTh: "แอปธนาคารไทย", pInt: "ธนาคารต่างประเทศ", revT: "รีวิวสินค้า", btnC: "ยืนยัน", btnS: "ส่งข้อมูล" },
+            en: { m1: "Home", m2: "Farms", m3: "Orders", m4: "Track", t1: "All", t2: "To Pay", t3: "To Ship", t4: "Transit", t5: "Review", s1: "Pending", s2: "Completed", p1: "Vannamei Shrimp (L)", p2: "Fresh River Prawn", qty: "Qty", b1: "Pay Now", b3: "Rate Now", payT: "Payment", pTh: "Thai Banking", pInt: "Global Bank", revT: "Product Review", btnC: "Confirm", btnS: "Submit" },
+            cn: { m1: "首页", m2: "农场", m3: "订单", m4: "查询", t1: "全部", t2: "待付款", t3: "待发货", t4: "运输中", t5: "评价", s1: "待付款", s2: "已完成", p1: "南美白对虾", p2: "大头虾", qty: "数量", b1: "立即付款", b3: "评分", payT: "支付方式", pTh: "泰国银行", pInt: "国际银行转账", revT: "商品评价", btnC: "确认", btnS: "提交" },
+            jp: { m1: "ホーム", m2: "ファーム", m3: "注文", m4: "追跡", t1: "すべて", t2: "支払い", t3: "発送", t4: "配送中", t5: "レビュー", s1: "未払い", s2: "完了", p1: "バナメイエビ", p2: "川エビ", qty: "数量", b1: "支払う", b3: "評価", payT: "お支払い", pTh: "タイの銀行", pInt: "海外送金", revT: "レビュー", btnC: "確定", btnS: "送信" },
+            kr: { m1: "홈", m2: "팜", m3: "주문", m4: "추적", t1: "전체", t2: "결제", t3: "배송", t4: "배송중", t5: "후기", s1: "결제대기", s2: "완료", p1: "흰다리새우", p2: "민물새우", qty: "수량", b1: "결제하기", b3: "평점", payT: "결제방법", pTh: "태국 은행", pInt: "해외 송금", revT: "상품 후기", btnC: "확인", btnS: "제출" }
+        };
+
+        function changeLang(lang) {
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang][key]) el.innerText = translations[lang][key];
+            });
+        }
+
+        // --- 2. ระบบดาวรีวิว ---
+        function setRate(n) {
+            const stars = document.querySelectorAll('#star-box span');
+            stars.forEach((s, i) => s.classList.toggle('active', i < n));
+        }
+
+        // --- 3. ระบบ Modal & Filter ---
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function filterOrder(status, event) {
+            const tabs = document.querySelectorAll('.tab-item');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            const cards = document.querySelectorAll('.order-card');
+            cards.forEach(card => {
+                card.style.display = (status === 'all' || card.getAttribute('data-status') === status) ? 'block' : 'none';
+            });
+        }
+
+        window.onclick = function (e) { if (e.target.className === 'modal') e.target.style.display = 'none'; }
+    </script>
+</body>
+
+</html>

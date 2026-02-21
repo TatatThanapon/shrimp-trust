@@ -22,7 +22,7 @@
             color: var(--secondary);
         }
 
-        /* Navigation Bar */
+        /* --- Navbar Style --- */
         nav {
             background: white;
             padding: 1rem 5%;
@@ -40,6 +40,14 @@
             font-weight: 700;
             color: var(--primary);
             text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
         }
 
         .nav-links a {
@@ -50,10 +58,30 @@
             transition: 0.3s;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: var(--primary);
         }
 
+        .login-btn {
+            background-color: var(--secondary);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 8px;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        #lang-select {
+            margin-left: 15px;
+            padding: 5px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-family: 'Anuphan';
+            cursor: pointer;
+        }
+
+        /* --- Farm Display Style --- */
         .container {
             max-width: 1200px;
             margin: 3rem auto;
@@ -65,16 +93,6 @@
             margin-bottom: 3rem;
         }
 
-        .header-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .header-section span {
-            color: var(--primary);
-        }
-
-        /* Grid Layout สำหรับ 35 ฟาร์ม */
         .farm-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -90,18 +108,42 @@
             border: 1px solid #eee;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .farm-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
-        /* ส่วนรูปภาพฟาร์ม */
+        .hot-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff0000;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 10;
+            animation: pulse-hot 1.5s infinite;
+        }
+
+        @keyframes pulse-hot {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
         .farm-visual {
             position: relative;
             height: 200px;
-            background: #ddd;
         }
 
         .farm-img {
@@ -123,19 +165,11 @@
             justify-content: center;
             border: 3px solid white;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            font-size: 1.2rem;
         }
 
         .farm-info {
             padding: 25px 20px 20px;
             flex-grow: 1;
-        }
-
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
         }
 
         .price {
@@ -144,43 +178,6 @@
             font-weight: 700;
         }
 
-        .online-status {
-            font-size: 0.75rem;
-            color: #27ae60;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            background: #27ae60;
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.4;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .location {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            margin-bottom: 15px;
-        }
-
-        /* แถบค่าสถานะ IoT */
         .water-status {
             display: flex;
             justify-content: space-between;
@@ -200,8 +197,6 @@
             display: block;
             font-size: 0.65rem;
             color: #94a3b8;
-            text-transform: uppercase;
-            margin-bottom: 2px;
         }
 
         .status-item span {
@@ -210,7 +205,13 @@
             font-size: 0.9rem;
         }
 
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
         .btn-line {
+            flex: 2;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -218,14 +219,132 @@
             background-color: var(--line-green);
             color: white;
             text-decoration: none;
-            padding: 14px;
+            padding: 12px;
             border-radius: 15px;
             font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .btn-web {
+            flex: 1;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.2rem;
             transition: 0.3s;
         }
 
-        .btn-line:hover {
-            background-color: #05b34c;
+        .btn-review {
+            flex: 1;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .btn-review:hover {
+            background: #f0f0f0;
+        }
+
+        /* --- Modal Common Style --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* --- Order Modal Style --- */
+        .order-form h2 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .order-form label {
+            display: block;
+            margin-top: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .order-form input,
+        .order-form select,
+        .order-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 5px 0 15px;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            font-family: 'Anuphan';
+            box-sizing: border-box;
+            background: #f9f9f9;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .pay-option {
+            border: 1.5px solid #eee;
+            padding: 10px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .pay-option.selected {
+            border-color: var(--primary);
+            background: #fff5eb;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .submit-order {
+            width: 100%;
+            padding: 15px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -233,104 +352,256 @@
 <body>
 
     <nav>
-        <a href="index.html" class="logo"
-            style="display: inline-flex; align-items: center; gap: 12px; text-decoration: none;">
-            <img src="images/555.jpg" alt="Logo" class="nav-logo-img" style="height: 60px; width: auto;">
-            <span style="color: #e67e22; font-weight: bold; font-size: 24px;">SHRIMP TRUST 2026</span>
+        <a href="index.html" class="logo">
+            <img src="images/555.jpg" alt="Logo" style="height: 50px; border-radius: 8px;">
+            <span style="color: #e67e22; font-weight: bold; font-size: 20px;">SHRIMP TRUST 2026</span>
         </a>
         <div class="nav-links">
-            <a href="index.html">หน้าหลัก</a>
-            <a href="farms.html" style="font-weight: 700; color: var(--primary);">สินค้าฟาร์ม</a>
-            <a href="tracking.html">เช็คพัสดุ</a>
-            <a href="about.html">ติดต่อเรา</a>
+            <a href="index.html" data-key="nav-home">หน้าหลัก</a>
+            <a href="farms.html" class="active" style="font-weight: 700; color: var(--primary);"
+                data-key="nav-farms">สินค้าฟาร์ม</a>
+            <a href="tracking.html" data-key="nav-tracking">เช็คพัสดุ</a>
+            <a href="reviews.html" data-key="nav-review">รีวิว</a>
+            <a href="about.html" data-key="nav-contact">ติดต่อเรา</a>
+            <a href="login.html" data-key="nav-login">เข้าสู่ระบบ</a> <select class="lang-select" id="lang-select"
+                onchange="changeLanguage(this.value)">
+                <option value="th">🇹🇭 TH</option>
+                <option value="en">🇺🇸 EN</option>
+                <option value="cn">🇨🇳 CN</option>
+                <option value="jp">🇯🇵 JP</option>
+                <option value="kr">🇰🇷 KR</option>
+            </select>
         </div>
     </nav>
 
     <div class="container">
         <div class="header-section">
-            <h1>🚜 ฟาร์ม <span>พันธมิตร</span> ทั้งหมด</h1>
-            <p>ตรวจสอบสถานะบ่อเลี้ยงแบบ Real-time และสั่งซื้อตรงจากเกษตรกร</p>
+            <h1>
+                <span data-key="farm-h1-emoji">🚜</span>
+                <span data-key="farm-h1-title">ฟาร์ม</span>
+                <span data-key="farm-h1-highlight">พันธมิตร</span>
+                <span data-key="farm-h1-all">ทั้งหมด</span>
+            </h1>
+            <p data-key="farm-subtitle">ตรวจสอบสถานะบ่อเลี้ยงแบบ Real-time และสั่งซื้อตรงจากเกษตรกร</p>
         </div>
+        <div class="farm-grid" id="farm-display"></div>
+    </div>
 
-        <div class="farm-grid" id="farm-display">
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeReviewModal()">&times;</span>
+            <div class="review-form">
+                <h2 id="modal-farm-name">รีวิวฟาร์ม</h2>
+                <input type="text" id="rev-name" placeholder="ชื่อของคุณ">
+                <select id="rev-country">
+                    <option value="TH">🇹🇭 TH</option>
+                    <option value="EN">🇺🇸 EN</option>
+                    <option value="CN">🇨🇳 CN</option>
+                    <option value="JP">🇯🇵 JP</option>
+                    <option value="KR">🇰🇷 KR</option>
+                </select>
+                <div class="star-rating" id="star-rating">
+                    <span onclick="setRating(1)">★</span><span onclick="setRating(2)">★</span><span
+                        onclick="setRating(3)">★</span><span onclick="setRating(4)">★</span><span
+                        onclick="setRating(5)">★</span>
+                </div>
+                <textarea id="rev-text" rows="4" placeholder="พิมพ์รีวิวของคุณที่นี่..."></textarea>
+                <button class="submit-review"
+                    style="width:100%; padding: 12px; background: var(--secondary); color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;"
+                    onclick="submitReview()">ส่งรีวิว</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeOrderModal()">&times;</span>
+            <div class="order-form">
+                <h2 id="order-farm-title">ยืนยันการสั่งซื้อ</h2>
+                <p id="order-price-summary" style="font-weight: bold; color: var(--primary);"></p>
+
+                <label>ประเภทการจัดส่ง</label>
+                <select id="ship-type" onchange="toggleShipForm()">
+                    <option value="local">📦 จัดส่งในประเทศไทย (Local)</option>
+                    <option value="inter">✈️ จัดส่งต่างประเทศ (International)</option>
+                </select>
+
+                <label>ชื่อ-นามสกุล ผู้รับ</label>
+                <input type="text" id="cust-name" placeholder="ระบุชื่อจริง">
+
+                <div id="local-address-fields">
+                    <label>จังหวัด</label>
+                    <select id="cust-province">
+                        <option value="">เลือกจังหวัด</option>
+                        <option>กรุงเทพฯ</option>
+                        <option>นครปฐม</option>
+                        <option>สมุทรสาคร</option>
+                    </select>
+                </div>
+
+                <div id="inter-address-fields" style="display:none;">
+                    <label>Country / City</label>
+                    <input type="text" id="cust-country" placeholder="e.g. Tokyo, Japan">
+                </div>
+
+                <label>ที่อยู่ / บ้านเลขที่ / รหัสไปรษณีย์</label>
+                <textarea id="cust-address" rows="3" placeholder="ระบุที่อยู่จัดส่งโดยละเอียด"></textarea>
+
+                <label>ช่องทางการชำระเงิน</label>
+                <div class="payment-methods">
+                    <div class="pay-option" onclick="selectPay(this)">🏦 โอนผ่านธนาคาร</div>
+                    <div class="pay-option" onclick="selectPay(this)">💳 บัตรเครดิต</div>
+                    <div class="pay-option" onclick="selectPay(this)">📱 QR PromptPay</div>
+                    <div class="pay-option" onclick="selectPay(this)">🌍 PayPal / Crypto</div>
+                </div>
+
+                <button class="submit-order" onclick="confirmOrder()">ยืนยันสั่งซื้อสินค้า</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // ข้อมูลจำลองสำหรับสร้างความหลากหลาย
-        const provinces = ["นครปฐม", "ฉะเชิงเทรา", "สมุทรสาคร", "ระยอง", "สระบุรี", "ราชบุรี", "สงขลา", "สุราษฎร์ฯ", "พังงา", "จันทบุรี"];
-        const farmNames = ["สมชายฟาร์ม", "กุ้งทองการเกษตร", "ทรัพย์ทวีฟาร์ม", "รุ่งเรืองพานิช", "ฟาร์มสุขใจ", "สยามอควา", "เพชรชริมป์"];
+        const translations = {
+            th: { "nav-home": "หน้าหลัก", "nav-farms": "สินค้าฟาร์ม", "nav-tracking": "เช็คพัสดุ", "nav-review": "รีวิว", "nav-contact": "ติดต่อเรา", "nav-login": "เข้าสู่ระบบ", "price-unit": "/ กก.", "btn-buy-line": "สั่งซื้อ LINE", "prov-label": "จังหวัด: ", "provinces": ["นครปฐม", "ฉะเชิงเทรา", "สมุทรสาคร", "ระยอง", "สระบุรี", "ราชบุรี", "สงขลา", "สุราษฎร์ฯ", "พังงา", "จันทบุรี"], "farmNames": ["สมชายฟาร์ม", "กุ้งทองการเกษตร", "ทรัพย์ทวีฟาร์ม", "รุ่งเรืองพานิช", "ฟาร์มสุขใจ", "สยามอควา", "เพชรชริมป์"] },
+            en: { "nav-home": "Home", "nav-farms": "Farm Products", "nav-tracking": "Tracking", "nav-review": "Review", "nav-contact": "Contact", "nav-login": "Login", "price-unit": "/ kg", "btn-buy-line": "Order LINE", "prov-label": "Province: ", "provinces": ["Nakhon Pathom", "Chachoengsao", "Samut Sakhon", "Rayong", "Saraburi", "Ratchaburi", "Songkhla", "Surat Thani", "Phang Nga", "Chanthaburi"], "farmNames": ["Somchai Farm", "Golden Shrimp", "Sub-Tavee Farm", "Rungrueang Farm", "Sukjai Farm", "Siam Aqua", "Phet Shrimp"] }
+        };
+
+        const farmImages = ["images/2-1.jpg", "images/2-2.jpg", "images/2-3.jpg", "images/2-4.jpg", "images/2-5.jpg", "images/2-6.jpg", "images/2-7.jpg", "images/2-8.jpg", "images/2-9.jpg", "images/2-10.jpg"];
         const icons = ["🦐", "🚜", "🌊", "🏠", "💎", "🌟"];
+        let currentRating = 0;
 
-        // รายการรูปฟาร์มกุ้งจริง (สลับกันใช้)
-        const farmImages = [
-            "images/2-1.jpg",
-            "images/2-2.jpg",
-            "images/2-3.jpg",
-            "images/2-4.jpg",
-            "images/2-5.jpg",
-            "images/2-6.jpg",
-            "images/2-7.jpg",
-            "images/2-8.jpg",
-            "images/2-9.jpg",
-            "images/2-10.jpg"
-        ];
-
-        const display = document.getElementById('farm-display');
-
-        // วนลูปสร้าง 35 ฟาร์ม
-        for (let i = 1; i <= 35; i++) {
-            const name = farmNames[Math.floor(Math.random() * farmNames.length)];
-            const prov = provinces[Math.floor(Math.random() * provinces.length)];
-            const icon = icons[Math.floor(Math.random() * icons.length)];
-            const price = Math.floor(Math.random() * (550 - 280)) + 280;
-            const img = farmImages[i % farmImages.length];
-
-            // สุ่มค่า IoT ให้ดูสมจริง
-            const temp = (Math.random() * (30 - 27) + 27).toFixed(1);
-            const ph = (Math.random() * (8.2 - 7.5) + 7.5).toFixed(1);
-            const ox = (Math.random() * (6 - 4) + 4).toFixed(1);
-
-            const cardHtml = `
-                <div class="farm-card">
-                    <div class="farm-visual">
-                        <img src="${img}" class="farm-img" alt="บ่อกุ้ง">
-                        <div class="farm-logo-overlay">${icon}</div>
-                    </div>
-                    <div class="farm-info">
-                        <div class="price-row">
-                            <div class="price">${price}.- <small style="font-size: 0.7rem; color: #888;">/ กก.</small></div>
-                            <div class="online-status"><div class="dot"></div> IoT Live</div>
-                        </div>
-                        <h3 style="margin: 0 0 5px 0; font-size: 1.1rem;">${name} #${i}</h3>
-                        <p class="location">📍 จังหวัด${prov}</p>
-
-                        <div class="water-status">
-                            <div class="status-item">
-                                <label>Temp</label>
-                                <span>${temp}°C</span>
-                            </div>
-                            <div class="status-item">
-                                <label>pH</label>
-                                <span>${ph}</span>
-                            </div>
-                            <div class="status-item">
-                                <label>Oxygen</label>
-                                <span>${ox}</span>
-                            </div>
-                        </div>
-
-                        <a href="https://line.me/ti/p/~ID_LINE" target="_blank" class="btn-line">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" width="18"> 
-                            สั่งซื้อผ่าน LINE
-                        </a>
-                    </div>
-                </div>
-            `;
-            display.innerHTML += cardHtml;
+        function changeLanguage(lang) {
+            localStorage.setItem('selectedLang', lang);
+            applyLanguage();
+            renderFarms();
         }
-    </script>
 
+        function applyLanguage() {
+            const lang = localStorage.getItem('selectedLang') || 'th';
+            document.getElementById('lang-select').value = lang;
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) el.innerText = translations[lang][key];
+            });
+        }
+
+        function renderFarms() {
+            const display = document.getElementById('farm-display');
+            display.innerHTML = '';
+            const lang = localStorage.getItem('selectedLang') || 'th';
+            const names = translations[lang]["farmNames"] || translations["th"]["farmNames"];
+            const provs = translations[lang]["provinces"] || translations["th"]["provinces"];
+
+            for (let i = 1; i <= 35; i++) {
+                const name = names[i % names.length];
+                const prov = provs[i % provs.length];
+                const icon = icons[i % icons.length];
+                const price = Math.floor(Math.random() * (550 - 280)) + 280;
+                const img = farmImages[i % farmImages.length];
+                const temp = (Math.random() * (30 - 27) + 27).toFixed(1);
+                const ph = (Math.random() * (8.2 - 7.5) + 7.5).toFixed(1);
+                const ox = (Math.random() * (6 - 4) + 4).toFixed(1);
+                let hotBadgeHtml = [1, 3, 5, 8, 12].includes(i) ? '<div class="hot-badge">HOT</div>' : '';
+
+                display.innerHTML += `
+                    <div class="farm-card">
+                        ${hotBadgeHtml}
+                        <div class="farm-visual">
+                            <img src="${img}" class="farm-img">
+                            <div class="farm-logo-overlay">${icon}</div>
+                        </div>
+                        <div class="farm-info">
+                            <div class="price">${price}.- <small>${translations[lang]["price-unit"]}</small></div>
+                            <h3>${name} #${i}</h3>
+                            <p style="font-size:0.9rem; color:#7f8c8d; margin-bottom:15px;">📍 ${translations[lang]["prov-label"]} ${prov}</p>
+                            <div class="water-status">
+                                <div class="status-item"><label>Temp</label><span>${temp}°C</span></div>
+                                <div class="status-item"><label>pH</label><span>${ph}</span></div>
+                                <div class="status-item"><label>Oxygen</label><span>${ox}</span></div>
+                            </div>
+                            <div class="btn-group">
+                                <a href="https://line.me/ti/p/~ID_LINE" target="_blank" class="btn-line">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" width="16"> 
+                                    <span>${translations[lang]["btn-buy-line"]}</span>
+                                </a>
+                                <button class="btn-web" onclick="openOrderModal('${name} #${i}', ${price})">🛒</button>
+                                <button class="btn-review" onclick="openReviewModal('${name} #${i}')">💬</button>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+        }
+
+        /* --- ฟังก์ชั่น Order Modal (ใหม่) --- */
+        function openOrderModal(name, price) {
+            document.getElementById('order-farm-title').innerText = "สั่งซื้อจาก " + name;
+            document.getElementById('order-price-summary').innerText = "ราคา: " + price + " บาท / กก.";
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        function closeOrderModal() { document.getElementById('orderModal').style.display = 'none'; }
+
+        function toggleShipForm() {
+            const type = document.getElementById('ship-type').value;
+            document.getElementById('local-address-fields').style.display = type === 'local' ? 'block' : 'none';
+            document.getElementById('inter-address-fields').style.display = type === 'inter' ? 'block' : 'none';
+        }
+
+        function selectPay(el) {
+            document.querySelectorAll('.pay-option').forEach(opt => opt.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function confirmOrder() {
+            const name = document.getElementById('cust-name').value;
+            if (!name) { alert("กรุณากรอกชื่อผู้รับครับ"); return; }
+            alert("ระบบได้รับคำสั่งซื้อของคุณ " + name + " เรียบร้อยแล้ว! กำลังนำคุณไปสู่หน้าชำระเงิน...");
+            closeOrderModal();
+        }
+
+        /* --- ฟังค์ชั่นรีวิวเดิม --- */
+        function openReviewModal(farmName) {
+            document.getElementById('modal-farm-name').innerText = "รีวิว " + farmName;
+            document.getElementById('reviewModal').style.display = 'flex';
+        }
+
+        function closeReviewModal() {
+            document.getElementById('reviewModal').style.display = 'none';
+            resetReviewForm();
+        }
+
+        function setRating(n) {
+            currentRating = n;
+            const stars = document.getElementById('star-rating').getElementsByTagName('span');
+            for (let i = 0; i < 5; i++) { stars[i].classList.toggle('active', i < n); }
+        }
+
+        function submitReview() {
+            const name = document.getElementById('rev-name').value;
+            const text = document.getElementById('rev-text').value;
+            if (!name || !text || currentRating === 0) { alert("กรุณากรอกข้อมูลให้ครบครับ"); return; }
+            alert("ขอบคุณสำหรับการรีวิวครับ!");
+            closeReviewModal();
+        }
+
+        function resetReviewForm() {
+            document.getElementById('rev-name').value = '';
+            document.getElementById('rev-text').value = '';
+            setRating(0);
+        }
+
+        window.onclick = function (e) {
+            if (e.target.className == 'modal') {
+                closeReviewModal();
+                closeOrderModal();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applyLanguage();
+            renderFarms();
+        });
+    </script>
 </body>
 
 </html>

@@ -3,24 +3,92 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>เกี่ยวกับเรา - Shrimp Trust</title>
     <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #e67e22;
+            --secondary: #2c3e50;
+            --white: #ffffff;
+        }
+
         body {
             font-family: 'Anuphan', sans-serif;
             line-height: 1.6;
-            padding: 50px;
+            margin: 0;
             background: #fff;
             color: #333;
         }
 
+        /* --- Navigation Bar --- */
+        nav {
+            background: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-area img {
+            height: 50px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            margin-left: 20px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .lang-select-nav {
+            margin-left: 15px;
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-family: 'Anuphan';
+            cursor: pointer;
+            background: white;
+        }
+
+        /* --- Content Area --- */
         .content-wrap {
             max-width: 800px;
-            margin: auto;
+            margin: 60px auto;
+            padding: 0 20px;
         }
 
         .highlight {
-            color: #e67e22;
+            color: var(--primary);
             font-weight: bold;
         }
 
@@ -29,25 +97,150 @@
             font-weight: bold;
             border-left: 4px solid #009688;
             padding-left: 15px;
+            margin: 30px 0;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .nav-links a:not(#lang-select) {
+                display: none;
+            }
+
+            /* ซ่อนเมนูอื่นบนมือถือ */
+            nav {
+                padding: 1rem 20px;
+            }
         }
     </style>
 </head>
 
 <body>
+
+    <nav>
+        <a href="index.html" class="logo-area">
+            <img src="images/555.jpg" alt="Logo">
+            <span class="logo-text">SHRIMP TRUST 2026</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" data-key="nav-home">หน้าหลัก</a>
+            <a href="farms.html" data-key="nav-farms">สินค้าฟาร์ม</a>
+            <a href="tracking.html" data-key="nav-tracking">เช็คพัสดุ</a>
+            <a href="about.html" style="font-weight: 700; color: var(--primary);" data-key="nav-contact">ติดต่อเรา</a>
+
+            <select class="lang-select-nav" id="lang-select" onchange="changeLanguage(this.value)">
+                <option value="th">🇹🇭 TH</option>
+                <option value="en">🇺🇸 EN</option>
+                <option value="cn">🇨🇳 CN</option>
+                <option value="jp">🇯🇵 JP</option>
+                <option value="kr">🇰🇷 KR</option>
+            </select>
+        </div>
+    </nav>
+
     <div class="content-wrap">
-        <h1>📖 เกี่ยวกับโปรเจกต์</h1>
-        <p><strong>Shrimp Trust 2026</strong> เกิดจากความตั้งใจที่จะช่วยเหลือเจ้าของฟาร์มกุ้งรายย่อยให้มีรายได้เพิ่มขึ้น
+        <h1 data-key="about-title">📖 เกี่ยวกับโปรเจกต์</h1>
+        <p data-key="about-desc"><strong>Shrimp Trust 2026</strong>
+            เกิดจากความตั้งใจที่จะช่วยเหลือเจ้าของฟาร์มกุ้งรายย่อยให้มีรายได้เพิ่มขึ้น
             โดยการสร้างความเชื่อมั่นให้กับผู้ซื้อผ่านระบบการตรวจสอบย้อนกลับ (Traceability)</p>
 
         <div class="su-logo">
-            <h3>โครงงานประกอบวิชา 401</h3>
-            <p>มหาวิทยาลัยศิลปากร (Silpakorn University)</p>
+            <h3 data-key="about-course">โครงงานประกอบวิชา 401</h3>
+            <p data-key="about-univ">มหาวิทยาลัยศิลปากร (Silpakorn University)</p>
         </div>
 
-        <h3>🎯 ความตั้งใจของเรา</h3>
-        <p>เราเชื่อว่า "ความซื่อสัตย์คือหัวใจของการค้าขาย" การที่ลูกค้าสามารถเห็นภาพบ่อกุ้ง รู้เวลาจับ
-            และรู้จักเจ้าของฟาร์ม จะช่วยให้กุ้งทุกตัวมีมูลค่ามากขึ้น และเกษตรกรสามารถอยู่ได้ด้วยตัวเองอย่างยั่งยืน</p>
+        <h3 data-key="about-aim-title">🎯 ความตั้งใจของเรา</h3>
+        <p data-key="about-aim-desc">เราเชื่อว่า "ความซื่อสัตย์คือหัวใจของการค้าขาย" การที่ลูกค้าสามารถเห็นภาพบ่อกุ้ง
+            รู้เวลาจับ และรู้จักเจ้าของฟาร์ม จะช่วยให้กุ้งทุกตัวมีมูลค่ามากขึ้น
+            และเกษตรกรสามารถอยู่ได้ด้วยตัวเองอย่างยั่งยืน</p>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" data-key="back-btn" style="text-decoration: none; color: #e67e22; font-weight: bold;">←
+                กลับหน้าหลัก</a>
+        </div>
     </div>
+
+    <script>
+        const translations = {
+            th: {
+                "nav-home": "หน้าหลัก", "nav-farms": "สินค้าฟาร์ม", "nav-tracking": "เช็คพัสดุ", "nav-contact": "ติดต่อเรา",
+                "about-title": "📖 เกี่ยวกับโปรเจกต์",
+                "about-desc": "Shrimp Trust 2026 เกิดจากความตั้งใจที่จะช่วยเหลือเจ้าของฟาร์มกุ้งรายย่อยให้มีรายได้เพิ่มขึ้น โดยการสร้างความเชื่อมั่นให้กับผู้ซื้อผ่านระบบการตรวจสอบย้อนกลับ (Traceability)",
+                "about-course": "โครงงานประกอบวิชา 401",
+                "about-univ": "มหาวิทยาลัยศิลปากร (Silpakorn University)",
+                "about-aim-title": "🎯 ความตั้งใจของเรา",
+                "about-aim-desc": "เราเชื่อว่า \"ความซื่อสัตย์คือหัวใจของการค้าขาย\" การที่ลูกค้าสามารถเห็นภาพบ่อกุ้ง รู้เวลาจับ และรู้จักเจ้าของฟาร์ม จะช่วยให้กุ้งทุกตัวมีมูลค่ามากขึ้น และเกษตรกรสามารถอยู่ได้ด้วยตัวเองอย่างยั่งยืน",
+                "back-btn": "← กลับหน้าหลัก"
+            },
+            en: {
+                "nav-home": "Home", "nav-farms": "Farms", "nav-tracking": "Tracking", "nav-contact": "Contact",
+                "about-title": "📖 About Project",
+                "about-desc": "Shrimp Trust 2026 was created to help small-scale shrimp farmers increase their income by building trust through traceability.",
+                "about-course": "Course Project 401",
+                "about-univ": "Silpakorn University",
+                "about-aim-title": "🎯 Our Mission",
+                "about-aim-desc": "We believe honesty is key. By showing the pond and harvest details, we increase value for both farmers and consumers.",
+                "back-btn": "← Back to Home"
+            },
+            cn: {
+                "nav-home": "首页", "nav-farms": "农场产品", "nav-tracking": "包裹查询", "nav-contact": "关于我们",
+                "about-title": "📖 关于项目",
+                "about-desc": "Shrimp Trust 2026 旨在通过追溯系统建立买家信心，帮助小规模虾农增加收入。",
+                "about-course": "401 课程项目",
+                "about-univ": "泰国艺术大学 (Silpakorn University)",
+                "about-aim-title": "🎯 我们的宗旨",
+                "about-aim-desc": "我们相信“诚信是贸易的核心”。让客户看到养殖池和收获时间，能提升产品价值并实现可持续发展。",
+                "back-btn": "← 返回首页"
+            },
+            jp: {
+                "nav-home": "ホーム", "nav-farms": "ファーム", "nav-tracking": "配送確認", "nav-contact": "お問い合わせ",
+                "about-title": "📖 プロジェクトについて",
+                "about-desc": "Shrimp Trust 2026は、トレーサビリティを通じて買い手の信頼を築き、小規模な養殖農家の収入向上を支援します。",
+                "about-course": "401 講義プロジェクト",
+                "about-univ": "シラパコーン大学",
+                "about-aim-title": "🎯 私たちの想い",
+                "about-aim-desc": "「誠実さは商売の心」だと信じています。養殖場の様子や収穫時間を公開することで、海老の価値を高め、持続可能な農業を支援します。",
+                "back-btn": "← ホームに戻る"
+            },
+            kr: {
+                "nav-home": "홈", "nav-farms": "농장 상품", "nav-tracking": "배송 조회", "nav-contact": "문의하기",
+                "about-title": "📖 프로젝트 소개",
+                "about-desc": "Shrimp Trust 2026은 이력 추적 시스템을 통해 구매자의 신뢰를 구축하고 소규모 새우 양식업자의 소득 증대를 돕기 위해 만들어졌습니다.",
+                "about-course": "401 과목 프로젝트",
+                "about-univ": "실파콘 대학교 (Silpakorn University)",
+                "about-aim-title": "🎯 우리의 목표",
+                "about-aim-desc": "우리는 \"정직이 상거래의 핵심\"이라고 믿습니다. 소비자가 양식장과 수확 시간을 확인함으로써 새우의 가치를 높이고 농민의 자립을 돕습니다.",
+                "back-btn": "← 홈으로 돌아가기"
+            }
+        };
+
+        function changeLanguage(lang) {
+            localStorage.setItem('selectedLang', lang);
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const lang = localStorage.getItem('selectedLang') || 'th';
+            document.getElementById('lang-select').value = lang;
+
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', applyLanguage);
+    </script>
 </body>
 
 </html>

@@ -12,6 +12,7 @@
             --secondary: #2c3e50;
             --success: #27ae60;
             --gold: #f1c40f;
+            --white: #ffffff;
         }
 
         body {
@@ -21,20 +22,83 @@
             color: var(--secondary);
         }
 
+        /* --- Navigation Bar --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-area img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .lang-select-nav {
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-family: 'Anuphan';
+            cursor: pointer;
+            background: white;
+        }
+
+        /* --- Header Banner --- */
         .header-banner {
             background: linear-gradient(135deg, var(--secondary), #445566);
             color: white;
-            padding: 40px 20px;
+            padding: 60px 20px;
             text-align: center;
             border-radius: 0 0 40px 40px;
         }
 
         .container {
             max-width: 800px;
-            margin: -30px auto 50px;
+            margin: -40px auto 50px;
             padding: 0 20px;
         }
 
+        /* --- Main Content Card --- */
         .main-card {
             background: white;
             border-radius: 25px;
@@ -55,7 +119,6 @@
             margin-bottom: 20px;
         }
 
-        /* ข้อมูลรายละเอียดกุ้ง */
         .info-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -81,7 +144,7 @@
             color: var(--secondary);
         }
 
-        /* Gallery รูปกุ้งเพิ่มเติ่ม */
+        /* --- Photo Gallery --- */
         .photo-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -98,13 +161,10 @@
             transition: 0.3s;
         }
 
-        .photo-grid img:hover {
-            transform: scale(1.02);
-        }
-
         .feature-list {
             list-style: none;
             padding: 0;
+            margin: 20px 0;
         }
 
         .feature-list li {
@@ -121,6 +181,7 @@
             font-weight: bold;
         }
 
+        /* --- Order Button --- */
         .order-btn {
             display: block;
             width: 100%;
@@ -135,58 +196,231 @@
             text-decoration: none;
             text-align: center;
             box-shadow: 0 10px 20px rgba(230, 126, 34, 0.3);
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+            }
+
+            .info-section {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
         }
     </style>
 </head>
 
 <body>
 
+    <nav class="navbar">
+        <div class="logo-area">
+            <img src="images/555.jpg" alt="Logo"> <span class="logo-text">Shrimp Trust 2026</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="farms.html" data-key="nav-farms">สินค้าฟาร์ม</a></li>
+            <li><a href="tracking.html" data-key="nav-tracking">เช็คพัสดุ</a></li>
+            <li><a href="product-detail.html" data-key="nav-demo">สแกนกุ้ง (Demo)</a></li>
+            <li><a href="about.html" data-key="nav-about">ติดต่อเรา</a></li>
+        </ul>
+        <select class="lang-select-nav" id="lang-select" onchange="changeLanguage(this.value)">
+            <option value="th">TH</option>
+            <option value="en">EN</option>
+            <option value="cn">CN</option>
+            <option value="jp">JP</option>
+            <option value="kr">KR</option>
+        </select>
+    </nav>
+
     <div class="header-banner">
-        <h1>SHRIMP PASSPORT</h1>
-        <p>รหัสยืนยันคุณภาพ: #ST-2026-999</p>
+        <h1 data-key="passport-h1">SHRIMP PASSPORT</h1>
+        <p><span data-key="passport-verify">รหัสยืนยันคุณภาพ:</span> #ST-2026-999</p>
     </div>
 
     <div class="container">
         <div class="main-card">
-            <div class="trust-badge">🛡️ ผ่านการตรวจสอบมาตรฐาน Shrimp Trust 2026</div>
+            <div class="trust-badge" data-key="trust-badge">🛡️ ผ่านการตรวจสอบมาตรฐาน Shrimp Trust 2026</div>
 
-            <h2>รายละเอียดการผลิต (Traceability)</h2>
+            <h2 data-key="trace-title">รายละเอียดการผลิต (Traceability)</h2>
             <div class="info-section">
-                <div class="info-tile"><label>สายพันธุ์</label><strong>กุ้งก้ามกราม ไข่แก้ว</strong></div>
-                <div class="info-tile"><label>ฟาร์มต้นทาง</label><strong>ฟาร์มมั่งคั่ง (กาญจนบุรี)</strong></div>
-                <div class="info-tile"><label>เวลาเก็บเกี่ยว</label><strong>04:15 น. (วันนี้)</strong></div>
-                <div class="info-tile"><label>คุณภาพน้ำ (pH)</label><strong>7.8 (มาตรฐานสากล)</strong></div>
-                <div class="info-tile"><label>อาหารที่ใช้</label><strong>สูตรโปรตีนสูง 40%</strong></div>
-                <div class="info-tile"><label>อุณหภูมิขนส่ง</label><strong>-2 องศาเซลเซียส</strong></div>
+                <div class="info-tile"><label data-key="info-species">สายพันธุ์</label><strong
+                        data-key="val-species">กุ้งก้ามกราม ไข่แก้ว</strong></div>
+                <div class="info-tile"><label data-key="info-farm">ฟาร์มต้นทาง</label><strong
+                        data-key="val-farm">ฟาร์มมั่งคั่ง (กาญจนบุรี)</strong></div>
+                <div class="info-tile"><label data-key="info-harvest">เวลาเก็บเกี่ยว</label><strong
+                        data-key="val-harvest">04:15 น. (วันนี้)</strong></div>
+                <div class="info-tile"><label data-key="info-ph">คุณภาพน้ำ (pH)</label><strong data-key="val-ph">7.8
+                        (มาตรฐานสากล)</strong></div>
+                <div class="info-tile"><label data-key="info-feed">อาหารที่ใช้</label><strong
+                        data-key="val-feed">สูตรโปรตีนสูง 40%</strong></div>
+                <div class="info-tile"><label data-key="info-temp">อุณหภูมิขนส่ง</label><strong data-key="val-temp">-2
+                        องศาเซลเซียส</strong></div>
             </div>
 
-            <h3>🖼️ ภาพบรรยากาศการคัดเลือกวันนี้</h3>
+            <h3 data-key="gallery-title">🖼️ ภาพบรรยากาศการคัดเลือกวันนี้</h3>
             <div class="photo-grid">
                 <img src="images/3-1.jpg" style="grid-row: span 2;" alt="กุ้งสด">
                 <img src="images/3-2.jpg" alt="บ่อกุ้ง">
                 <img src="images/3-3.jpg" alt="การคัดเลือก">
             </div>
 
-            <h3>📝 บันทึกจากเจ้าของฟาร์ม</h3>
-            <p style="color: #666;">"กุ้งชุดนี้เราคัดเฉพาะตัวที่เปลือกแข็ง เนื้อแน่น และมีไข่เต็มท้อง
-                เพื่อส่งมอบประสบการณ์ที่ดีที่สุดให้กับลูกค้าที่แสกนมาเจอหน้านี้ครับ"</p>
+            <h3 data-key="note-title">📝 บันทึกจากเจ้าของฟาร์ม</h3>
+            <p style="color: #666;" data-key="note-content">"กุ้งชุดนี้เราคัดเฉพาะตัวที่เปลือกแข็ง เนื้อแน่น
+                และมีไข่เต็มท้อง เพื่อส่งมอบประสบการณ์ที่ดีที่สุดให้กับลูกค้าที่แสกนมาเจอหน้านี้ครับ"</p>
 
             <ul class="feature-list">
-                <li>รับประกันสดใหม่ ไม่ค้างคืน</li>
-                <li>ปลอดสารฟอร์มาลีน 100%</li>
-                <li>บรรจุในกล่องควบคุมอุณหภูมิมาตรฐานสูง</li>
+                <li data-key="feat-1">รับประกันสดใหม่ ไม่ค้างคืน</li>
+                <li data-key="feat-2">ปลอดสารฟอร์มาลีน 100%</li>
+                <li data-key="feat-3">บรรจุในกล่องควบคุมอุณหภูมิมาตรฐานสูง</li>
             </ul>
 
             <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
 
-            <a href="https://line.me" class="order-btn">🛒 สั่งซื้อกุ้งจากฟาร์มนี้โดยตรง</a>
+            <a href="https://line.me" class="order-btn" data-key="order-direct">🛒 สั่งซื้อกุ้งจากฟาร์มนี้โดยตรง</a>
             <p style="text-align: center; margin-top: 15px;">
-                <a href="index.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">←
-                    กลับสู่หน้าหลัก</a>
+                <a href="index.html" style="color: var(--primary); text-decoration: none; font-weight: 500;"
+                    data-key="back-home">← กลับสู่หน้าหลัก</a>
             </p>
         </div>
     </div>
 
+    <script>
+        const translations = {
+            th: {
+                "nav-farms": "สินค้าฟาร์ม", "nav-tracking": "เช็คพัสดุ", "nav-demo": "สแกนกุ้ง (Demo)", "nav-about": "ติดต่อเรา",
+                "passport-h1": "SHRIMP PASSPORT", "passport-verify": "รหัสยืนยันคุณภาพ:",
+                "trust-badge": "🛡️ ผ่านการตรวจสอบมาตรฐาน Shrimp Trust 2026",
+                "trace-title": "รายละเอียดการผลิต (Traceability)",
+                "info-species": "สายพันธุ์", "val-species": "กุ้งก้ามกราม ไข่แก้ว",
+                "info-farm": "ฟาร์มต้นทาง", "val-farm": "ฟาร์มมั่งคั่ง (กาญจนบุรี)",
+                "info-harvest": "เวลาเก็บเกี่ยว", "val-harvest": "04:15 น. (วันนี้)",
+                "info-ph": "คุณภาพน้ำ (pH)", "val-ph": "7.8 (มาตรฐานสากล)",
+                "info-feed": "อาหารที่ใช้", "val-feed": "สูตรโปรตีนสูง 40%",
+                "info-temp": "อุณหภูมิขนส่ง", "val-temp": "-2 องศาเซลเซียส",
+                "gallery-title": "🖼️ ภาพบรรยากาศการคัดเลือกวันนี้",
+                "note-title": "📝 บันทึกจากเจ้าของฟาร์ม",
+                "note-content": "\"กุ้งชุดนี้เราคัดเฉพาะตัวที่เปลือกแข็ง เนื้อแน่น และมีไข่เต็มท้อง เพื่อส่งมอบประสบการณ์ที่ดีที่สุดให้กับลูกค้าที่แสกนมาเจอหน้านี้ครับ\"",
+                "feat-1": "รับประกันสดใหม่ ไม่ค้างคืน",
+                "feat-2": "ปลอดสารฟอร์มาลีน 100%",
+                "feat-3": "บรรจุในกล่องควบคุมอุณหภูมิมาตรฐานสูง",
+                "order-direct": "🛒 สั่งซื้อกุ้งจากฟาร์มนี้โดยตรง",
+                "back-home": "← กลับสู่หน้าหลัก"
+            },
+            en: {
+                "nav-farms": "Products", "nav-tracking": "Tracking", "nav-demo": "Demo Scan", "nav-about": "Contact",
+                "passport-h1": "SHRIMP PASSPORT", "passport-verify": "Verification ID:",
+                "trust-badge": "🛡️ Certified by Shrimp Trust 2026",
+                "trace-title": "Traceability Details",
+                "info-species": "Species", "val-species": "Giant River Prawn",
+                "info-farm": "Source Farm", "val-farm": "Mung-Kung Farm",
+                "info-harvest": "Harvest Time", "val-harvest": "04:15 AM (Today)",
+                "info-ph": "Water Quality (pH)", "val-ph": "7.8 (Standard)",
+                "info-feed": "Feed Type", "val-feed": "High Protein 40%",
+                "info-temp": "Shipping Temp", "val-temp": "-2 °C",
+                "gallery-title": "🖼️ Today's Selection Gallery",
+                "note-title": "📝 Farm Owner's Note",
+                "note-content": "\"Selected for the best quality and firm meat to ensure the best experience.\"",
+                "feat-1": "Guaranteed fresh, no overnight",
+                "feat-2": "100% Formalin-free",
+                "feat-3": "High-standard temperature box",
+                "order-direct": "🛒 Order Directly from Farm",
+                "back-home": "← Back to Home"
+            },
+            cn: {
+                "nav-farms": "农场产品", "nav-tracking": "包裹查询", "nav-demo": "扫描演示", "nav-about": "联系我们",
+                "passport-h1": "虾类护照 (SHRIMP PASSPORT)", "passport-verify": "质量验证码:",
+                "trust-badge": "🛡️ 通过 Shrimp Trust 2026 标准认证",
+                "trace-title": "生产详情 (可追溯性)",
+                "info-species": "品种", "val-species": "大头虾 (含卵)",
+                "info-farm": "来源农场", "val-farm": "Mung-Kung 农场",
+                "info-harvest": "采收时间", "val-harvest": "04:15 (今天)",
+                "info-ph": "水质 (pH)", "val-ph": "7.8 (国际标准)",
+                "info-feed": "饲料类型", "val-feed": "高蛋白配方 40%",
+                "info-temp": "运输温度", "val-temp": "-2 °C",
+                "gallery-title": "🖼️ 今日筛选现场",
+                "note-title": "📝 农场主寄语",
+                "note-content": "\"特意挑选了肉质紧实且卵满的虾，为您提供最佳体验。\"",
+                "feat-1": "保证新鲜，不隔夜",
+                "feat-2": "100% 不含甲醛",
+                "feat-3": "高标准控温包装",
+                "order-direct": "🛒 直接向农场订购",
+                "back-home": "← 返回首页"
+            },
+            jp: {
+                "nav-farms": "ファーム商品", "nav-tracking": "配送確認", "nav-demo": "スキャンデモ", "nav-about": "お問い合わせ",
+                "passport-h1": "海老パスポート", "passport-verify": "品質認証コード:",
+                "trust-badge": "🛡️ Shrimp Trust 2026 基準合格",
+                "trace-title": "生産詳細（トレーサビリティ）",
+                "info-species": "品種", "val-species": "オニテナガエビ",
+                "info-farm": "産地農場", "val-farm": "ムンクン養殖場",
+                "info-harvest": "収穫時間", "val-harvest": "04:15 (本日)",
+                "info-ph": "水質 (pH)", "val-ph": "7.8 (標準)",
+                "info-feed": "飼料", "val-feed": "高タンパク 40%",
+                "info-temp": "輸送温度", "val-temp": "-2 °C",
+                "gallery-title": "🖼️ 本日の選別風景",
+                "note-title": "📝 オーナーのメモ",
+                "note-content": "\"最高品質の体験をお届けするため、身が詰まった個体を厳選しました。\"",
+                "feat-1": "鮮度保証、即日配送",
+                "feat-2": "ホルマリン 100% 不使用",
+                "feat-3": "高水準の温度管理ボックス",
+                "order-direct": "🛒 農場から直接注文する",
+                "back-home": "← ホームに戻る"
+            },
+            kr: {
+                "nav-farms": "농장 상품", "nav-tracking": "배송 조회", "nav-demo": "새우 스캔", "nav-about": "문의하기",
+                "passport-h1": "새우 패스포트 (SHRIMP PASSPORT)", "passport-verify": "인증 코드:",
+                "trust-badge": "🛡️ Shrimp Trust 2026 표준 인증 완료",
+                "trace-title": "생산 상세 정보",
+                "info-species": "품종", "val-species": "민물 거대 새우",
+                "info-farm": "출처 농장", "val-farm": "Mung-Kung 농장",
+                "info-harvest": "수확 시간", "val-harvest": "04:15 (오늘)",
+                "info-ph": "수질 (pH)", "val-ph": "7.8 (표준)",
+                "info-feed": "사료 종류", "val-feed": "고단백 40%",
+                "info-temp": "운송 온도", "val-temp": "-2 °C",
+                "gallery-title": "🖼️ 오늘의 선별 현장",
+                "note-title": "📝 농장주의 메시지",
+                "note-content": "\"최상의 경험을 제공하기 위해 살이 꽉 찬 새우만을 엄선했습니다.\"",
+                "feat-1": "신선도 보장",
+                "feat-2": "포르말린 무첨가",
+                "feat-3": "온도 제어 박스 포장",
+                "order-direct": "🛒 농장에서 직접 주문",
+                "back-home": "← กลับสู่หน้าหลัก"
+            }
+        };
+
+        // ฟังก์ชันเปลี่ยนภาษาและบันทึกลง LocalStorage
+        function changeLanguage(lang) {
+            localStorage.setItem('selectedLang', lang.toLowerCase());
+            applyLanguage();
+        }
+
+        // ฟังก์ชันดึงค่ามาแปลหน้าจอ
+        function applyLanguage() {
+            let lang = localStorage.getItem('selectedLang') || 'th';
+            lang = lang.toLowerCase();
+
+            // อัปเดตตัวเลือกใน Dropdown ให้ตรงกับภาษาปัจจุบัน
+            const selectEl = document.getElementById('lang-select');
+            if (selectEl) selectEl.value = lang;
+
+            // ค้นหาทุก Element ที่มี data-key แล้วเปลี่ยนข้อความ
+            const elements = document.querySelectorAll('[data-key]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+        }
+
+        // รันทันทีเมื่อโหลดหน้าจอ
+        document.addEventListener('DOMContentLoaded', applyLanguage);
+    </script>
 </body>
 
 </html>
